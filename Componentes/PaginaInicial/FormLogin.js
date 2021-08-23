@@ -1,27 +1,55 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import CampoTexto from '../Util/CampoTexto';
+import Botao from '../Util/Botao';
 import stylesForm from '../../Stylesheets/stylesForm';
+import Usuario from '../../lib/database/Usuario';
 
-let email = "";
-let senha = "";
+const FormLogin = ({ navigation }) => {
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [erro, setErro] = useState("");
 
-const FormLogin = () => {
+    const ValidaDados = () => {
+        if (email.length === 0 || senha.length === 0) {
+            return false;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    const Autenticar = () => {
+        if (ValidaDados()) {
+            Usuario.AutenticarUsuario(email, senha)
+            .then((logado) => {
+                if (logado) {
+                    navigation.navigate("Home");
+                } else {
+                    setErro("Credenciais inválidas. Tente novamente.");
+                }
+            })
+            .catch((err) => {
+                setErro("Ocorreu um erro ao acessar o banco de dados. Tente novamente mais tarde.");
+            })
+        } else {
+            setErro("Preencha os dados corretamente.");
+        }
+    }
+
     return (
-        <View style={stylesForm.container}>
-            <Text style={stylesForm.heading}>Entrar na sua conta</Text>
-            <CampoTexto campo="E-mail" callbackEntrada={(textoCampo) => email = textoCampo} />
-            <CampoTexto campo="Senha" isPassword={true} callbackEntrada={(textoCampo) => senha = textoCampo} />
-            <Button title="Entrar" onPress={ValidaDados}></Button>
+        <View style={stylesForm.containerLogin}>
+            <Text style={stylesForm.heading}>LOGIN</Text>
+            { erro ? <Text style={stylesForm.errorAlert}>{erro}</Text> : <Text></Text> }
+            <CampoTexto campo="E-mail" tipo="email" callbackEntrada={(textoCampo) => setEmail(textoCampo)} />
+            <CampoTexto campo="Senha" tipo="senha" callbackEntrada={(textoCampo) => setSenha(textoCampo)} />
+            <Botao title="ENTRAR" onPress={Autenticar}/>
         </View>
     );
-}
-
-const ValidaDados = () => {
-    if (email.length === 0 || senha.length === 0) {
-        console.log("Dados inválidos");
-    }
 }
 
 export default FormLogin;

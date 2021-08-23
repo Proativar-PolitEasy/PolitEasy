@@ -18,7 +18,7 @@ function Home ({navigation}) {
       </TouchableOpacity>*/}
           <TouchableOpacity
           style={[styles.button,styles.curvinha]}
-          onPress={()=> navigation.navigate('Home')} 
+          onPress={()=> navigation.navigate('Cadastro')} 
           //quando clica redirecionar para outra página (não funciona ainda)
           //.navigate está dando erro
         >
@@ -27,7 +27,7 @@ function Home ({navigation}) {
       <Text style={[styles.textoheader,{marginLeft:20}]}>/</Text>
           <TouchableOpacity
           style={[styles.button,styles.curvinha]}
-          onPress={()=> navigation.navigate('Atividades')}
+          onPress={()=> navigation.navigate('Login')}
           >
           <Text style={styles.textoheader}>Atividades</Text>
           </TouchableOpacity>
