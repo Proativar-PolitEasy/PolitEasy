@@ -10,10 +10,14 @@ function Perfil({navigation}) {
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', flexGrow:1}}>
                 <View style={{width:'100%',height:'9%',flexDirection:"row",marginTop:25}}>
                     <View style={{flex:1, flexDirection:'row'}}>
-                        <AntDesign name='adduser' size={50} color='#545454'/> 
+                        <TouchableOpacity>
+                            <AntDesign name='adduser' size={50} color='#545454'/> 
+                        </TouchableOpacity>
                     </View>
                     <View style={{flex:1, flexDirection:'row-reverse'}}>
-                        <AntDesign name='setting' size={50} color='#545454'/> 
+                        <TouchableOpacity onPress={()=>{navigation.navigate('Config')}} >
+                            <AntDesign name='setting' size={50} color='#545454'/> 
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{width:'100%',height:'60%',flexDirection:'row'}}>

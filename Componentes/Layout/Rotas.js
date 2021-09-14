@@ -7,8 +7,9 @@ import Atividades from '../Atividades/Atividades';
 import Sobre from '../Sobre/Sobre';
 import FormLogin from '../PaginaInicial/FormLogin';
 import FormCadastro from '../PaginaInicial/FormCadastro';
-import Perfil from '../Perfil/Perfil'
+import Perfil from '../Perfil/Perfil';
 import Temas from '../Atividades/Temas';
+import Config from '../Config/Config';
 
 const Routes = createStackNavigator();
 
@@ -25,6 +26,7 @@ function Rotas() {
       <Routes.Screen name ="Cadastro" component={FormCadastro}/>
       <Routes.Screen name ="Login" component={FormLogin}/>
       <Routes.Screen name ="Perfil" component={Perfil}/>
+      <Routes.Screen name ="Config" component={Config}/>
       <Routes.Screen name ="Temas" component={Temas}/>
     </Routes.Navigator>
   );
