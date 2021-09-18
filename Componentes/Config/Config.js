@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { Text, View, StyleSheet, Button, TouchableOpacity} from 'react-native';
-import { AntDesign, Octicons, Ionicons, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons, Octicons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 import Sobre from '../Sobre/Sobre'
 
@@ -9,25 +9,55 @@ function Config({navigation}) {
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', alignItems:'center', flexGrow:1}}>
-                <View style={{width:'100%',height:'15%', justifyContent:'flex-end', marginLeft:15}}>
+
+                {/* SETAR PRA VOLTAR */}
+                <View style={{width:'100%',height:'17%', justifyContent:'flex-end', marginLeft:15}}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Perfil')}>
+                        <AntDesign name="leftcircleo" size={50} color="#092838"/>
+                    </TouchableOpacity>
                 </View>
 
+                {/* SOBRE */}
+                    <View style={{height:'4%', width:'100%', justifyContent:'center', alignItems:'flex-end', flexDirection:'row', marginLeft:'5%'}}>
+                    <Text style={{color: "white", fontSize: 50, fontWeight: "bold", paddingBottom: 15, textAlign: "center"}}>Ajustes</Text>
+                    <View style={{marginBottom:'5%'}}>
+                        <AntDesign name='setting' size={50} color='white'/> 
+                    </View>
+                </View>
+
+
                 <View style={{width:'90%',height:'50%', marginTop:'5%', marginBottom:'20%', borderRadius:18,
-                            flexDirection:'column', alignItems:'center', justifyContent:'space-around',}}>
-                    <View style={estilos.boxconfigs}>
+                            flexDirection:'column', alignItems:'center', justifyContent:'space-around'}}>
+                    <TouchableOpacity style={estilos.boxconfigs}>
                         <Text style={{fontSize:32, textAlign:'left', marginLeft:10, color:'white'}}>Som Geral</Text>
-                        <TouchableOpacity style={{marginRight:20}}>
+                        <View style={{marginRight:20}}>
                             <Octicons name="unmute" size={50} color='white'/>
-                            <Octicons name="mute" size={50} color='white'/>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={estilos.boxconfigs}>
+                            {/*<Octicons name="mute" size={50} color='white'/>        OPÇÃO DESLIGADO           */}
+                        </View>
+                    </TouchableOpacity>
+
+                    <View style={{height:10}}></View>
+
+                    <TouchableOpacity style={estilos.boxconfigs}>
                         <Text style={{fontSize:32, textAlign:'left', marginLeft:10, color:'white'}}>Notificações</Text>
-                        <TouchableOpacity style={{marginRight:20}}>
+                        <View style={{marginRight:20}}>
                             <Ionicons name="notifications" size={50} color='white'/>
-                            <Ionicons name="notifications-off" size={50} color='white'/>
-                        </TouchableOpacity>
-                    </View>
+                            {/*<Ionicons name="notifications-off" size={50} color='white'/>        OPÇÃO DESLIGADO           */}
+                        </View>
+                    </TouchableOpacity>
+
+                    <View style={{height:10}}></View>
+
+                    <TouchableOpacity style={estilos.boxconfigs}>
+                        <Text style={{fontSize:32, textAlign:'left', marginLeft:10, color:'white'}}>Vibração</Text>
+                        <View style={{marginRight:20}}>
+                            <MaterialCommunityIcons name="vibrate" size={50} color='white'/>
+                            {/*<MaterialCommunityIcons name="vibrate-off" size={50} color='white'/>        OPÇÃO DESLIGADO           */}
+                        </View>
+                    </TouchableOpacity>
+
+                    <View style={{height:10}}></View>
+
                     <TouchableOpacity style={estilos.boxconfigs} onPress={()=>{navigation.navigate('Sobre')}}>
                         <Text style={{fontSize:32, textAlign:'left', marginLeft:10, color:'white'}}>Sobre</Text>
                         <View style={{marginRight:20}}>
@@ -36,10 +66,10 @@ function Config({navigation}) {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{width:'100%',height:'20%',alignItems:'center'}}>
+                <View style={{width:'100%',height:'20%',alignItems:'center'}}> 
                     <TouchableOpacity style={{
                                             width: 160,
-                                            height: 40,
+                                            height: 50,
                                             elevation: 5,
                                             backgroundColor: "#9b0000",
                                             borderRadius: 18,
@@ -47,6 +77,8 @@ function Config({navigation}) {
                                             borderColor: "#9b0000",
                                             justifyContent: "center",
                                             alignItems: "center",}}>
+                        {/*BOTÃO SAIR*/}
+
                         <View style={{marginBottom: 20,
                                         right: 1,
                                         width: 160,
@@ -84,21 +116,6 @@ const estilos = StyleSheet.create({
     shadowRadius: 9.51,
     elevation: 15,},
 
-    txtbtn:{
-        textAlign:'center', 
-        textAlignVertical:'center',
-        color:'white'
-    },
-
-    btn:{
-        width:'40%',
-        height:'40%',
-        textAlign:'center', 
-        justifyContent:'center',
-        color:'white',
-        margin:5
-    },
-
     boxconfigs:{
         flexDirection:'row',
         width: '80%',
@@ -108,6 +125,6 @@ const estilos = StyleSheet.create({
         borderRadius: 18,
         borderColor: "#0e587d",
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     }
 })

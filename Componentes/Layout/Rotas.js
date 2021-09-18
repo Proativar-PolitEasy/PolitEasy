@@ -10,6 +10,7 @@ import FormCadastro from '../PaginaInicial/FormCadastro';
 import Perfil from '../Perfil/Perfil';
 import Temas from '../Atividades/Temas';
 import Config from '../Config/Config';
+import Rank from '../Rank/Rank';
 
 const Routes = createStackNavigator();
 
@@ -28,6 +29,7 @@ function Rotas() {
       <Routes.Screen name ="Perfil" component={Perfil}/>
       <Routes.Screen name ="Config" component={Config}/>
       <Routes.Screen name ="Temas" component={Temas}/>
+      <Routes.Screen name ="Rank" component={Rank}/>
     </Routes.Navigator>
   );
 }

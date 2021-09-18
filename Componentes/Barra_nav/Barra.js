@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 
-export default function() {
+export default function(navigation) {
     return (
         <View style={{width:'100%',height:'30%',flexDirection:"row",backgroundColor:'#092838',justifyContent:'space-around'}}>
             <View style={{flexGrow:1,padding:10}}>

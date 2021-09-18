@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity} from 'react-native';
-import { AntDesign, FontAwesome5} from '@expo/vector-icons';
+import { AntDesign, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 
 function Perfil({navigation}) {
@@ -10,7 +10,7 @@ function Perfil({navigation}) {
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', flexGrow:1}}>
                 <View style={{width:'100%',height:'9%',flexDirection:"row",marginTop:25}}>
                     <View style={{flex:1, flexDirection:'row'}}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{navigation.navigate('Rank')}}>
                             <AntDesign name='adduser' size={50} color='#545454'/> 
                         </TouchableOpacity>
                     </View>
@@ -23,7 +23,7 @@ function Perfil({navigation}) {
                 <View style={{width:'100%',height:'60%',flexDirection:'row'}}>
                     <View style={{flexGrow:1,}}></View>
                     <View style={{flexGrow:1,alignItems:'center', justifyContent:'flex-start'}}>
-                        <FontAwesome5 name='user-graduate' size={200} color='#545454'/>
+                        <FontAwesome name='user-circle' size={200} color='#545454'/>
                         <View style={{flexDirection:'row'}}>
                             <TouchableOpacity onPress={()=>{navigation.navigate('Login')}} style={[estilos.sombra,estilos.btn]}>
                                 <Text style={estilos.txtbtn}>LOGIN</Text>

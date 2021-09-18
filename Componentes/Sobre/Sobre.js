@@ -2,7 +2,6 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
-import styles from '../../Stylesheets/styles';
 
 function Sobre ({navigation: { goBack }}) {
     return (
@@ -11,7 +10,7 @@ function Sobre ({navigation: { goBack }}) {
           {/* SETAR PRA VOLTAR */}
           <View style={{width:'100%',height:'15%', justifyContent:'flex-end', marginLeft:15}}>
             <TouchableOpacity onPress={() => goBack()}>
-            <AntDesign name="leftcircleo" size={50} color="black"/>
+              <AntDesign name="leftcircleo" size={50} color="#092838"/>
             </TouchableOpacity>
           </View>
 
