@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity, ScrollView} from 'react-native';
 import { AntDesign, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 
@@ -20,7 +20,7 @@ function Perfil({navigation}) {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{width:'100%',height:'60%',flexDirection:'row'}}>
+                <View style={{width:'100%',height:'50%',flexDirection:'row'}}>
                     <View style={{flexGrow:1,}}></View>
                     <View style={{flexGrow:1,alignItems:'center', justifyContent:'flex-start'}}>
                         <FontAwesome name='user-circle' size={200} color='#545454'/>
@@ -36,7 +36,27 @@ function Perfil({navigation}) {
                     <View style={{flexGrow:1,}}>
                     </View>
                 </View>
-                <Text style={{fontSize:40, textAlign:'center', textAlignVertical:'center'}}></Text>
+                <View style={{flexGrow:1, height:'32%'}}>
+                    <View style={{width:'100%', height:'20%'}}>
+                        <Text style={{fontSize:30, textAlign:'center', textAlignVertical:'center'}}>ESTATÍSTICAS</Text>
+                    </View>
+                    <View style={{width:'100%', height:'80%', flexDirection:'row'}}>
+                        <View style={{width:'10%', height:'100%', }}></View>
+                        <View style={{width:'40%', height:'100%', alignItems:'flex-start', justifyContent:'space-around'}}>
+                            <Text style={estilos.txtestatistica}>Escolaridade:</Text>
+                            <Text style={estilos.txtestatistica}>Perguntas:</Text>
+                            <Text style={estilos.txtestatistica}>Acertos:</Text>
+                            <Text style={estilos.txtestatistica}>Ranking:</Text>
+                        </View>
+                        <View style={{width:'40%', height:'100%', alignItems:'flex-end', justifyContent:'space-around'}}>
+                            <Text style={estilos.infoestatistica}>Aluno</Text>
+                            <Text style={estilos.infoestatistica}>250</Text>
+                            <Text style={estilos.infoestatistica}>170</Text>
+                            <Text style={estilos.infoestatistica}>Diamante</Text>
+                        </View>
+                        <View style={{width:'10%', height:'100%',}}></View>
+                    </View>
+                </View>
             </View>
             <View>
                 <Base/>
@@ -60,15 +80,25 @@ const estilos = StyleSheet.create({
     txtbtn:{
         textAlign:'center', 
         textAlignVertical:'center',
-        color:'white'
+        color:'white',
+        fontSize:16
     },
 
     btn:{
         width:'40%',
-        height:'40%',
+        height:'50%',
         textAlign:'center', 
         justifyContent:'center',
         color:'white',
         margin:5
+    },
+
+    txtestatistica:{
+        fontSize:20,
+        fontWeight:'bold'
+    },
+
+    infoestatistica:{
+        fontSize:20,
     }
 })
