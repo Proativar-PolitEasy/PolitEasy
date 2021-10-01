@@ -76,7 +76,8 @@ function Config({navigation}) {
                                             borderWidth: 1,
                                             borderColor: "#9b0000",
                                             justifyContent: "center",
-                                            alignItems: "center",}}>
+                                            alignItems: "center",}}
+                                            onPress={()=>{navigation.navigate('Quizz')}}>
                         {/*BOTÃO SAIR*/}
 
                         <View style={{marginBottom: 20,
