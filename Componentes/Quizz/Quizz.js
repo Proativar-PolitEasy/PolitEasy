@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity, ScrollV
 import { AntDesign, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 
-function Quizz({navigation}) {
+function Quizz({route, navigation}) {
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', flexGrow:1}}>

@@ -43,8 +43,6 @@ const FormLogin = ({ route, navigation }) => {
             setErro("Preencha os dados corretamente.");
         }
     }
-    
-    console.log(route.params.idUsuario);
 
     return (
         <View style={stylesForm.containerLogin}>
