@@ -103,6 +103,20 @@ const stylesForm = StyleSheet.create({
         backgroundColor: "#A70D0D",
         opacity: 0.8,
         borderRadius: 20
+    },
+    avatarPicker: {
+        width: "100%",
+        height: "10%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    avatarPreview: {
+        width: "60%",
+        height: "60%",
+        resizeMode: "contain",
+        borderRadius: 500
     }
 });
 

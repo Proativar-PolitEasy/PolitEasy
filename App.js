@@ -1,13 +1,27 @@
 import 'react-native-gesture-handler';
-import React  from 'react';
+import {DeviceEventEmitter} from "react-native";
+import React, { useState }  from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Rotas from './Componentes/Layout/Rotas';
 import Perfil from './Componentes/Perfil/Perfil';
 
 export default function App() {
+  const [usuario, setUsuario] = useState("");
+
+  // Se ocorrer a autenticação, atualiza o usuário nessa função.
+  // Escolhido pela simplicidade, caso contrário teríamos que usar Redux ou alguma tecnologia que consumisse tempo de desenvolvimento.
+  DeviceEventEmitter.addListener("event.LogarUsuario", (idUsuario) => {
+    setUsuario(idUsuario);
+  })
+
+  // Se ele sair da conta, limpar ID.
+  DeviceEventEmitter.addListener("event.DeslogarUsuario", (idUsuario) => {
+    setUsuario("");
+  })
+
   return (
     <NavigationContainer>
-    <Rotas/>
+    <Rotas usuario={usuario} />
     </NavigationContainer>
   );
 }

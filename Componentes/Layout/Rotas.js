@@ -14,22 +14,23 @@ import Rank from '../Rank/Rank';
 
 const Routes = createStackNavigator();
 
-function Rotas() {
+function Rotas(props) {
+  // initialParams é passado para todos os componentes para que eles recebam a informação se o usuário está logado ou não.
   return (
     <Routes.Navigator
     screenOptions={{
       headerShown: false //não ficar com um nome em cima
     }}>
-      <Routes.Screen name ="Home" component={Home}/>
-      <Routes.Screen name ="Home_oficial" component={Home_oficial}/>
-      <Routes.Screen name ="Atividades" component={Atividades}/>
-      <Routes.Screen name ="Sobre" component={Sobre}/>
-      <Routes.Screen name ="Cadastro" component={FormCadastro}/>
-      <Routes.Screen name ="Login" component={FormLogin}/>
-      <Routes.Screen name ="Perfil" component={Perfil}/>
-      <Routes.Screen name ="Config" component={Config}/>
-      <Routes.Screen name ="Temas" component={Temas}/>
-      <Routes.Screen name ="Rank" component={Rank}/>
+      <Routes.Screen name ="Home" component={Home} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Home_oficial" component={Home_oficial} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Atividades" component={Atividades} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Sobre" component={Sobre} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Cadastro" component={FormCadastro} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Login" component={FormLogin} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Perfil" component={Perfil} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Config" component={Config} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Temas" component={Temas} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Rank" component={Rank} initialParams={{ idUsuario: props.usuario }} />
     </Routes.Navigator>
   );
 }

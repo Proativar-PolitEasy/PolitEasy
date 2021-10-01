@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 
-function Sobre ({navigation: { goBack }}) {
+function Sobre ({route, navigation: { goBack }}) {
     return (
       <View style={{flex:1,backgroundColor:'#16abb2', alignItems:'center'}}>
 

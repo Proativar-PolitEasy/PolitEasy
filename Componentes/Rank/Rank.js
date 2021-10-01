@@ -5,7 +5,7 @@ import { FontAwesome5, FontAwesome, AntDesign, Fontisto } from '@expo/vector-ico
 import Base from '../Barra_nav/Barra'
 import Sobre from '../Sobre/Sobre'
 
-function Config({navigation}) {
+function Config({route, navigation}) {
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', alignItems:'center', flexGrow:1}}>

@@ -4,13 +4,15 @@ import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity, ScrollV
 import { AntDesign, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 
-function Perfil({navigation}) {
+function Perfil({route, navigation}) {
+    console.log(route.params.idUsuario);
+
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', flexGrow:1}}>
                 <View style={{width:'100%',height:'9%',flexDirection:"row",marginTop:25}}>
                     <View style={{flex:1, flexDirection:'row'}}>
-                        <TouchableOpacity onPress={()=>{navigation.navigate('Rank')}}>
+                        <TouchableOpacity onPress={()=>Logar()}>
                             <AntDesign name='adduser' size={50} color='#545454'/> 
                         </TouchableOpacity>
                     </View>

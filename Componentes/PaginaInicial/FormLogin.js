@@ -1,12 +1,12 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, DeviceEventEmitter } from 'react-native';
 import CampoTexto from '../Util/CampoTexto';
 import Botao from '../Util/Botao';
 import stylesForm from '../../Stylesheets/stylesForm';
 import Usuario from '../../lib/database/Usuario';
 
-const FormLogin = ({ navigation }) => {
+const FormLogin = ({ route, navigation }) => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
@@ -26,8 +26,11 @@ const FormLogin = ({ navigation }) => {
     const Autenticar = () => {
         if (ValidaDados()) {
             Usuario.AutenticarUsuario(email, senha)
-            .then((logado) => {
-                if (logado) {
+            .then((idUsuario) => {
+                if (idUsuario) {
+                    DeviceEventEmitter.emit("event.LogarUsuario", idUsuario);
+                    console.log("Logado.");
+
                     navigation.navigate("Home");
                 } else {
                     setErro("Credenciais inválidas. Tente novamente.");
@@ -40,6 +43,8 @@ const FormLogin = ({ navigation }) => {
             setErro("Preencha os dados corretamente.");
         }
     }
+    
+    console.log(route.params.idUsuario);
 
     return (
         <View style={stylesForm.containerLogin}>

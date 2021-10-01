@@ -6,7 +6,7 @@ import { EvilIcons } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra';
 import Temas from './Temas';
 
-function Atividades ({navigation}) {
+function Atividades ({route, navigation}) {
     return (
       <ImageBackground source={require('../../assets/bg.jpg')} style={{flex:1, resizeMode:'cover'}}>
         <View style={{flex:1}}>

@@ -3,7 +3,7 @@ import { Text, View, ImageBackground, Image } from 'react-native';
 import { } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra';
 
-export default function Home_oficial() {
+export default function Home_oficial({route, navigation}) {
     return (
         <ImageBackground source={require('../../assets/bg.jpg')} style={{flex:1, resizeMode:'cover'}}>
             <View style={{flex:1,}}>

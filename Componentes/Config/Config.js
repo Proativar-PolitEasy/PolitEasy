@@ -1,11 +1,16 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, Button, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { AntDesign, MaterialCommunityIcons, Octicons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 import Sobre from '../Sobre/Sobre'
 
-function Config({navigation}) {
+function Config({route, navigation}) {
+    const Logout = () => {
+        DeviceEventEmitter.emit("event.DeslogarUsuario");
+        navigation.navigate("Home_oficial");
+    }
+    
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', alignItems:'center', flexGrow:1}}>
@@ -67,7 +72,7 @@ function Config({navigation}) {
                 </View>
 
                 <View style={{width:'100%',height:'20%',alignItems:'center'}}> 
-                    <TouchableOpacity style={{
+                    <TouchableOpacity   style={{
                                             width: 160,
                                             height: 50,
                                             elevation: 5,
@@ -76,7 +81,8 @@ function Config({navigation}) {
                                             borderWidth: 1,
                                             borderColor: "#9b0000",
                                             justifyContent: "center",
-                                            alignItems: "center",}}>
+                                            alignItems: "center",}}
+                                        onPress={() => Logout()}>
                         {/*BOTÃO SAIR*/}
 
                         <View style={{marginBottom: 20,

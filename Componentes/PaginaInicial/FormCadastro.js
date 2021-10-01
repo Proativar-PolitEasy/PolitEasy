@@ -1,11 +1,12 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, Image } from 'react-native';
 import CampoTexto from '../Util/CampoTexto';
 import CampoData from '../Util/CampoData';
 import Botao from '../Util/Botao';
 import stylesForm from '../../Stylesheets/stylesForm';
 import Usuario from '../../lib/database/Usuario';
+import ModalAvatar from './ModalAvatar';
 
 const FormatarData = (data) => {
     const dia = data.getDate().toString();
@@ -18,7 +19,7 @@ const FormatarData = (data) => {
     return diaComZero + "/" + mesComZero + "/" + ano;
 }
 
-const FormCadastro = ({ navigation }) => {
+const FormCadastro = ({ route, navigation }) => {
     const [usuario, setUsuario] = useState({
         "nome": "",
         "email": "",
@@ -28,6 +29,20 @@ const FormCadastro = ({ navigation }) => {
         "uf": "",
         "cidade": ""
     });
+    const [modalVisivel, setModalVisivel] = useState(false);
+    const [avatar, setAvatar] = useState(0);
+
+    // Caminhos manuais porque require não aceita caminho dinâmico
+    const opcoesAvatar = [
+        require('../../assets/avatares/avatar0.png'),
+        require('../../assets/avatares/avatar1.png'),
+        require('../../assets/avatares/avatar2.png'),
+        require('../../assets/avatares/avatar3.png'),
+        require('../../assets/avatares/avatar4.png'),
+        require('../../assets/avatares/avatar5.png'),
+        require('../../assets/avatares/avatar6.png'),
+        require('../../assets/avatares/avatar7.png'),
+    ];
 
     const EditarUsuario = (propriedade, valor) => {
         // Atualiza o usuário no state
@@ -59,7 +74,7 @@ const FormCadastro = ({ navigation }) => {
 
     const Cadastrar = () => {
         let idUsuario;
-    
+
         if (ValidaDados()) {
             // Campos preenchidos corretamente.
             Usuario.VerificarEmail(usuario["email"])
@@ -70,6 +85,7 @@ const FormCadastro = ({ navigation }) => {
                 }
                 else {
                     idUsuario = Usuario.SalvarUsuario(usuario);
+                    Usuario.SalvarAvatar(idUsuario, avatar);
                     navigation.navigate("Home");
                 }
     
@@ -83,10 +99,32 @@ const FormCadastro = ({ navigation }) => {
         }
     }
 
+    const AbrirJanela = () => {
+        // Abre janela de avatares
+        setModalVisivel(true);
+    }
+
+    const FecharJanela = (avatarSelecionado = null) => {
+        // Fecha janela de avatares.
+        setModalVisivel(false);
+
+        // Se o componente que chamou essa função passar um avatar, atribuir como o avatar escolhido pelo usuário.
+        if (avatarSelecionado != null) {
+            setAvatar(avatarSelecionado);
+        }
+    }
+
     return (
         <ScrollView>
             <View style={stylesForm.containerCadastro}>
                 <Text style={stylesForm.heading}>CADASTRO</Text>
+
+                <View style={stylesForm.avatarPicker}>
+                    <Image source={opcoesAvatar[avatar]} style={stylesForm.avatarPreview}/>
+                    <ModalAvatar visible={modalVisivel} onRequestClose={FecharJanela} />
+                </View>
+
+                <Botao title="Adicionar avatar" onPress={AbrirJanela}/>
                 <CampoTexto campo="Nome"                tipo="texto" callbackEntrada={(texto) => EditarUsuario("nome", texto)} />
                 <CampoTexto campo="E-mail"              tipo="email" callbackEntrada={(texto) => EditarUsuario("email", texto)} />
                 <CampoTexto campo="Senha"               tipo="senha" callbackEntrada={(texto) => EditarUsuario("senha", texto)} />

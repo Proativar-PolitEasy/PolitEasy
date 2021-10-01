@@ -39,10 +39,23 @@ function Temas ({route, navigation}) {
                 <EvilIcons name='search' size={50}/>
             </View>
           </View>
-          <View style={{width:'100%',height:'100%', paddingTop:25, flexDirection:'column', alignItems:'center'}}>
+          <View style={{width:'100%',height:'100%', paddingTop:25, flexDirection:'row', justifyContent: "space-evenly", alignItems:'center', flexWrap: "wrap"}}>
               {
                   temas.map(tema => 
-                    <View style={{width: '90%', paddingLeft: 10, marginTop: 10, backgroundColor:'white', borderRadius:20}} key={tema.id}>
+                    <View 
+                      style={{
+                        width: '44%', 
+                        height: 50,
+                        paddingLeft: 10, 
+                        marginTop: 10, 
+                        backgroundColor:'white', 
+                        borderRadius:20,
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "center"
+                      }} 
+                      key={tema.id}
+                    >
                         <Text>{tema["descricao"]}</Text>
                     </View>)
               }
