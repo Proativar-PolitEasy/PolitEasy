@@ -22,7 +22,26 @@ function Config({route, navigation}) {
                 <View style={{width:'100%', height:'65%', alignItems:'center', justifyContent:'flex-start'}}>
                     <View style={{width:'80%', height:'15%', backgroundColor:'grey', borderTopStartRadius:10, borderTopEndRadius:10}}></View>
                     <View style={{ width:'80%', height:'85%', backgroundColor:'white', flexDirection:'row', alignItems:'flex-end', marginTop:-1, borderBottomStartRadius: 10, borderBottomEndRadius: 10}}>
-                        <ScrollView><Text style={{fontSize:60}}>DESCE A TELA AQUI.... COLOQUEI UM SCROLL VIEW PARA ENUMERAR OS RANKS DAS PESSOAS COM MAIS PONTOS NO APP</Text></ScrollView>
+                        <ScrollView>
+                            <View style={{width:'100%', height:40, backgroundColor:'red'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'orange'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'yellow'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'lightgreen'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'green'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'blue'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'purple'}}></View>
+                            
+                            <View style={{width:'100%', height:40, backgroundColor:'red'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'orange'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'yellow'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'lightgreen'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'green'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'blue'}}></View>
+                            <View style={{width:'100%', height:40, backgroundColor:'purple'}}></View>
+                            
+                            
+                            <Text style={{fontSize:60}}>DESCE A TELA AQUI.... COLOQUEI UM SCROLL VIEW PARA ENUMERAR OS RANKS DAS PESSOAS COM MAIS PONTOS NO APP</Text>
+                        </ScrollView>
                     </View>
                 </View>
 

@@ -11,6 +11,7 @@ import Perfil from '../Perfil/Perfil';
 import Temas from '../Atividades/Temas';
 import Config from '../Config/Config';
 import Rank from '../Rank/Rank';
+import Quizz from '../Quizz/Quizz'
 
 const Routes = createStackNavigator();
 
@@ -31,6 +32,7 @@ function Rotas(props) {
       <Routes.Screen name ="Config" component={Config} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Temas" component={Temas} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Rank" component={Rank} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Quizz" component={Quizz} initialParams={{ idUsuario: props.usuario }} />
     </Routes.Navigator>
   );
 }
