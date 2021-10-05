@@ -59,7 +59,7 @@ function Perfil({route, navigation}) {
                 </View>
             </View>
             <View>
-                <Base/>
+                <Base navigation={navigation} />
             </View>
         </View>
     );

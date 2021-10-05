@@ -52,7 +52,7 @@ function Atividades ({route, navigation}) {
           </View>
           </View>
           <View>
-            <Base/>
+            <Base navigation={navigation} />
           </View>
         </View>
       </ImageBackground>

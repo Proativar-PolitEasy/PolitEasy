@@ -52,7 +52,7 @@ function Config({route, navigation}) {
             </View>
 
             <View>
-                <Base/>
+                <Base navigation={navigation} />
             </View>
         </View>
     );

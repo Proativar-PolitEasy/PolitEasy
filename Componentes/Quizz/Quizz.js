@@ -10,7 +10,7 @@ function Quizz({route, navigation}) {
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', flexGrow:1}}>
             </View>
             <View>
-                <Base/>
+                <Base navigation={navigation} />
             </View>
         </View>
     );
