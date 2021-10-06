@@ -18,12 +18,12 @@ function Config({route, navigation}) {
                 {/* SETAR PRA VOLTAR */}
                 <View style={{width:'100%',height:'17%', justifyContent:'flex-end', marginLeft:15}}>
                     <TouchableOpacity onPress={()=>navigation.navigate('Perfil')}>
-                        <AntDesign name="leftcircleo" size={50} color="#092838"/>
+                        <AntDesign name="leftcircleo" size={50} color="white"/>
                     </TouchableOpacity>
                 </View>
 
                 {/* SOBRE */}
-                    <View style={{height:'4%', width:'100%', justifyContent:'center', alignItems:'flex-end', flexDirection:'row', marginLeft:'5%'}}>
+                <View style={{height:'4%', width:'100%', justifyContent:'center', alignItems:'flex-end', flexDirection:'row', marginLeft:'5%'}}>
                     <Text style={{color: "white", fontSize: 50, fontWeight: "bold", paddingBottom: 15, textAlign: "center"}}>Ajustes</Text>
                     <View style={{marginBottom:'5%'}}>
                         <AntDesign name='setting' size={50} color='white'/> 
@@ -38,16 +38,6 @@ function Config({route, navigation}) {
                         <View style={{marginRight:20}}>
                             <Octicons name="unmute" size={50} color='white'/>
                             {/*<Octicons name="mute" size={50} color='white'/>        OPÇÃO DESLIGADO           */}
-                        </View>
-                    </TouchableOpacity>
-
-                    <View style={{height:10}}></View>
-
-                    <TouchableOpacity style={estilos.boxconfigs}>
-                        <Text style={{fontSize:32, textAlign:'left', marginLeft:10, color:'white'}}>Notificações</Text>
-                        <View style={{marginRight:20}}>
-                            <Ionicons name="notifications" size={50} color='white'/>
-                            {/*<Ionicons name="notifications-off" size={50} color='white'/>        OPÇÃO DESLIGADO           */}
                         </View>
                     </TouchableOpacity>
 
@@ -69,6 +59,16 @@ function Config({route, navigation}) {
                             <FontAwesome name="info-circle" size={50} color='white'/>
                         </View>
                     </TouchableOpacity>
+
+                    <View style={{height:10}}></View>
+
+                    <TouchableOpacity style={estilos.boxconfigs} onPress={()=>{navigation.navigate('Sobre')}}>
+                        <Text style={{fontSize:32, textAlign:'left', marginLeft:10, color:'white'}}>Sobre</Text>
+                        <View style={{marginRight:20}}>
+                            <FontAwesome name="info-circle" size={50} color='white'/>
+                        </View>
+                    </TouchableOpacity>
+
                 </View>
 
                 <View style={{width:'100%',height:'20%',alignItems:'center',}}> 

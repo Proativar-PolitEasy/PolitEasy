@@ -10,7 +10,7 @@ function Sobre ({route, navigation: { goBack }}) {
           {/* SETAR PRA VOLTAR */}
           <View style={{width:'100%',height:'15%', justifyContent:'flex-end', marginLeft:15}}>
             <TouchableOpacity onPress={() => goBack()}>
-              <AntDesign name="leftcircleo" size={50} color="#092838"/>
+              <AntDesign name="leftcircleo" size={50} color="white"/>
             </TouchableOpacity>
           </View>
 
