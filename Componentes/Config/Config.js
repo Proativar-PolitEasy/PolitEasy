@@ -31,7 +31,7 @@ function Config({route, navigation}) {
                 </View>
 
 
-                <View style={{width:'90%',height:'50%', marginTop:'5%', marginBottom:'20%', borderRadius:18,
+                <View style={{width:'90%',height:'50%', marginTop:'5%', marginBottom:'15%', borderRadius:18,
                             flexDirection:'column', alignItems:'center', justifyContent:'space-around'}}>
                     <TouchableOpacity style={estilos.boxconfigs}>
                         <Text style={{fontSize:32, textAlign:'left', marginLeft:10, color:'white'}}>Som Geral</Text>
@@ -71,31 +71,12 @@ function Config({route, navigation}) {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{width:'100%',height:'20%',alignItems:'center'}}> 
-                    <TouchableOpacity   style={{
-                                            width: 160,
-                                            height: 50,
-                                            elevation: 5,
-                                            backgroundColor: "#9b0000",
-                                            borderRadius: 18,
-                                            borderWidth: 1,
-                                            borderColor: "#9b0000",
-                                            justifyContent: "center",
-                                            alignItems: "center",}}
+                <View style={{width:'100%',height:'20%',alignItems:'center',}}> 
+                    <TouchableOpacity style={estilos.btn}
                                         onPress={() => Logout()}>
                         {/*BOTÃO SAIR*/}
 
-                        <View style={{marginBottom: 20,
-                                        right: 1,
-                                        width: 160,
-                                        height: 50,
-                                        elevation: 2,
-                                        backgroundColor: "#c43c3c",
-                                        borderRadius: 18,
-                                        borderWidth: 1,
-                                        borderColor: "#9b0000",
-                                        justifyContent: "center",
-                                        alignItems: "center"}}>
+                        <View style={estilos.btnfundo}>
                             <Text style={{color:'white', fontSize:20}}>Sair</Text>
                         </View>
                     </TouchableOpacity>
@@ -113,14 +94,29 @@ export default Config;
 const liga = (n) => {return n++}
 
 const estilos = StyleSheet.create({
-    sombra:{
-    borderRadius:2, 
-    backgroundColor:'#0e577d',
-    shadowColor: "#000",
-    shadowOffset: {width: 0, height: 7,},
-    shadowOpacity: 0.43,
-    shadowRadius: 9.51,
-    elevation: 15,},
+    btn:{
+        width: 160,
+        height: 60,
+        elevation: 5,
+        backgroundColor: "#9b0000",
+        borderRadius: 18,
+        borderWidth: 1,
+        borderColor: "#9b0000",
+        justifyContent: "center",
+        alignItems: "center",},
+    
+    btnfundo:{
+        marginBottom: 10,
+        right: 1,
+        width: 160,
+        height: 50,
+        elevation: 2,
+        backgroundColor: "#c43c3c",
+        borderRadius: 18,
+        borderWidth: 1,
+        borderColor: "#9b0000",
+        justifyContent: "center",
+        alignItems: "center"},
 
     boxconfigs:{
         flexDirection:'row',

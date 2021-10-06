@@ -5,6 +5,7 @@ import styles from '../../Stylesheets/styles';
 import { EvilIcons } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra';
 import Temas from './Temas';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function Atividades ({route, navigation}) {
     return (
@@ -13,7 +14,9 @@ function Atividades ({route, navigation}) {
           <View style={{width:'100%',height:'91%',}}>
           <View style={{width:'100%', height:'19%', justifyContent:'flex-end', alignItems:'center'}}>
             <View style={{width:'70%', height:'41%', backgroundColor:'white', borderRadius:100 }}>
-                <EvilIcons name='search' size={50}/>
+                <TouchableOpacity onPress={()=>{navigation.navigate('Quizz')}}>
+                  <EvilIcons name='search' size={50}/>
+                </TouchableOpacity>
             </View>
           </View>
           <View style={{width:'100%',height:'100%', flexDirection:'row', flexWrap:'wrap'}}>

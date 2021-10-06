@@ -12,6 +12,7 @@ import Temas from '../Atividades/Temas';
 import Config from '../Config/Config';
 import Rank from '../Rank/Rank';
 import Quizz from '../Quizz/Quizz'
+import TestePolitica from '../TestePolitica/TestePolitica'
 
 const Routes = createStackNavigator();
 
@@ -22,7 +23,6 @@ function Rotas(props) {
     screenOptions={{
       headerShown: false //não ficar com um nome em cima
     }}>
-      <Routes.Screen name ="Home" component={Home} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Home_oficial" component={Home_oficial} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Atividades" component={Atividades} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Sobre" component={Sobre} initialParams={{ idUsuario: props.usuario }} />
@@ -33,6 +33,7 @@ function Rotas(props) {
       <Routes.Screen name ="Temas" component={Temas} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Rank" component={Rank} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Quizz" component={Quizz} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="TestePolitica" component={TestePolitica} initialParams={{ idUsuario: props.usuario }} />
     </Routes.Navigator>
   );
 }
