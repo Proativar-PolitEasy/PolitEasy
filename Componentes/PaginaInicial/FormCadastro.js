@@ -86,7 +86,7 @@ const FormCadastro = ({ route, navigation }) => {
                 else {
                     idUsuario = Usuario.SalvarUsuario(usuario);
                     Usuario.SalvarAvatar(idUsuario, avatar);
-                    navigation.navigate("Home");
+                    navigation.navigate("Home_oficial");
                 }
     
             })

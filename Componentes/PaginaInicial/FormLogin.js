@@ -31,7 +31,7 @@ const FormLogin = ({ route, navigation }) => {
                     DeviceEventEmitter.emit("event.LogarUsuario", idUsuario);
                     console.log("Logado.");
 
-                    navigation.navigate("Home");
+                    navigation.navigate("Home_oficial");
                 } else {
                     setErro("Credenciais inválidas. Tente novamente.");
                 }
