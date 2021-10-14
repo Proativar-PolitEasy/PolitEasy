@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../PaginaInicial/Home';
 import Home_oficial from '../Home_oficial/Home';
+import Principal from '../Atividades/Principal';
 import Atividades from '../Atividades/Atividades';
 import Sobre from '../Sobre/Sobre';
 import FormLogin from '../PaginaInicial/FormLogin';
@@ -26,6 +27,7 @@ function Rotas(props) {
       headerShown: false //não ficar com um nome em cima
     }}>
       <Routes.Screen name ="Home_oficial" component={Home_oficial} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name ="Atividades/Principal" component={Principal} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Atividades" component={Atividades} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Sobre" component={Sobre} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name ="Cadastro" component={FormCadastro} initialParams={{ idUsuario: props.usuario }} />

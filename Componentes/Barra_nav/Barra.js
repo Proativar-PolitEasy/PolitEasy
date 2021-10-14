@@ -12,7 +12,7 @@ export default function({ navigation }) {
                 </TouchableOpacity>
             </View>
             <View style={{flexGrow:1,padding:10}}>
-                <TouchableOpacity onPress={() => navigation.navigate("Atividades")}>
+                <TouchableOpacity onPress={() => navigation.navigate("Atividades/Principal")}>
                     <Image 
                         source={require('../../assets/atividades.png')}
                         style={{width:"100%",height:'100%',resizeMode:'contain'}}/>
