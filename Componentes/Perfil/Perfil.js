@@ -38,7 +38,7 @@ function Perfil({route, navigation}) {
                 </View>
                 <View style={{flexGrow:1, height:'32%'}}>
                     <View style={{width:'100%', height:'20%'}}>
-                        <Text style={{fontSize:30, textAlign:'center', textAlignVertical:'center'}}>ESTATÍSTICAS</Text>
+                        <Text style={{fontSize:30, textAlign:'center', textAlignVertical:'center', textDecorationLine:'underline'}}>ESTATÍSTICAS</Text>
                     </View>
                     <View style={{width:'100%', height:'80%', flexDirection:'row'}}>
                         <View style={{width:'10%', height:'100%', }}></View>
@@ -50,7 +50,7 @@ function Perfil({route, navigation}) {
                         </View>
                         <View style={{width:'40%', height:'100%', alignItems:'flex-end', justifyContent:'space-around'}}>
                             <Text style={estilos.infoestatistica}>Aluno</Text>
-                            <Text style={estilos.infoestatistica}>250</Text>
+                            <Text style={estilos.infoestatistica}>250</Text>{/* AQUI É AS INFORMAÇÕES DO PERFIL !! */}
                             <Text style={estilos.infoestatistica}>170</Text>
                             <Text style={estilos.infoestatistica}>Diamante</Text>
                         </View>
