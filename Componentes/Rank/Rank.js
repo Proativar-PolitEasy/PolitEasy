@@ -38,8 +38,12 @@ function Config({ route, navigation }) {
                 </View>
 
                 <View style={{ width: '100%', height: '65%', alignItems: 'center', justifyContent: 'flex-start' }}>
-                    <View style={{ width: '80%', height: '15%', backgroundColor: 'grey', borderTopStartRadius: 10, borderTopEndRadius: 10, borderColor: 'black', borderWidth: 1 }}></View>
-                    <View style={{ width: '80%', height: '85%', backgroundColor: 'white', flexDirection: 'row', alignItems: 'flex-start', marginTop: -1, borderColor: 'black', borderWidth: 1 }}>
+                    
+                    <View style={{ width: '80%', height: '10%', borderTopStartRadius: 10, borderTopEndRadius: 10, borderColor: 'black', borderWidth: 1, flexDirection:'row' }}>
+                        <View style={{ width: '100%', height: '100%', backgroundColor: '#96352a', justifyContent: 'center', alignItems: 'center', borderTopStartRadius: 9, borderTopEndRadius: 9 }}></View>
+                    </View>
+
+                    <View style={{ width: '80%', height: '85%', backgroundColor: '#96352a', flexDirection: 'row', alignItems: 'flex-start', marginTop: -1, borderColor: 'black', borderWidth: 1 }}>
                         <ScrollView>
                             {itens}
                         </ScrollView>

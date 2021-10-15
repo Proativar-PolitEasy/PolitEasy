@@ -10,7 +10,7 @@ function Perfil({route, navigation}) {
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', flexGrow:1}}>
                 <View style={{width:'100%',height:'9%',flexDirection:"row",marginTop:25}}>
                     <View style={{flex:1, flexDirection:'row'}}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{navigation.navigate('Quizz')}}>
                             <AntDesign name='adduser' size={50} color='#545454'/> 
                         </TouchableOpacity>
                     </View>

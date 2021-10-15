@@ -60,15 +60,6 @@ function Config({route, navigation}) {
                         </View>
                     </TouchableOpacity>
 
-                    <View style={{height:10}}></View>
-
-                    <TouchableOpacity style={estilos.boxconfigs} onPress={()=>{navigation.navigate('Sobre')}}>
-                        <Text style={{fontSize:32, textAlign:'left', marginLeft:10, color:'white'}}>Sobre</Text>
-                        <View style={{marginRight:20}}>
-                            <FontAwesome name="info-circle" size={50} color='white'/>
-                        </View>
-                    </TouchableOpacity>
-
                 </View>
 
                 <View style={{width:'100%',height:'20%',alignItems:'center',}}> 

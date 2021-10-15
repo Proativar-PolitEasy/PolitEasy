@@ -10,7 +10,7 @@ function Quizz({route, navigation: { goBack }}) {
             <View style={{width:'100%', height:25, backgroundColor:'white'}}></View>
 
             {/* CABEÇALHO */}
-            <View style={{width:'100%',height:'10%', justifyContent:'center', backgroundColor:'#cc8135', flexDirection:'row'}}>
+            <View style={{width:'100%',height:'10%', justifyContent:'center', backgroundColor:'#a3672a', flexDirection:'row'}}>
                 <View style={{height:'100%', width:'15%', justifyContent:"center", alignItems:'flex-end',marginRight:"3%"}}>{/* SETA VOLTAR*/}
                     <TouchableOpacity onPress={() => goBack()}>
                         <AntDesign name="leftcircleo" size={50} color="white"/>
@@ -26,12 +26,12 @@ function Quizz({route, navigation: { goBack }}) {
             </View>
 
             {/* CAIXA DE TEXTO DA PERGUNTA */}
-            <View style={{height:'35%', width:'95%', marginTop:'3%', borderRadius:10, justifyContent:'center', alignItems:'center', elevation:5, backgroundColor:'#cc8135'}}>
+            <View style={{height:'35%', width:'95%', marginTop:'3%', borderRadius:10, justifyContent:'center', alignItems:'center', elevation:5, backgroundColor:'#a3672a'}}>
                 <View style={{height:'94%', width:'96.5%', backgroundColor:'white', borderRadius:10,justifyContent:'flex-end'}}>
                     <View style={{width:'100%', height:'85%', justifyContent:'center'}}>
                         <Text style={estilos.txtpergunta}>AQUI  É  O  TEXTO  DA  PERGUNTA ! ! ! </Text>
                     </View>
-                    <View style={{backgroundColor:'#cc8135', height:'15%'}}>
+                    <View style={{backgroundColor:'#a3672a', height:'15%'}}>
                         <Text style={{fontSize:22, textAlign:'center'}}>1 / 10</Text>
                     </View>
                 </View>
