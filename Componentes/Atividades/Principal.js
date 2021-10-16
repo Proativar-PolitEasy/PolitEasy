@@ -42,9 +42,14 @@ function Principal ({route, navigation}) {
         })
 
         return () => {
-            this.backHandler.remove();
-            this.backHandlerCorrect.remove();
-        };
+            if (backHandler) {
+                BackHandler.removeEventListener(backHandler);
+            }
+
+            if (backHandlerCorrect) {
+                BackHandler.removeEventListener(backHandlerCorrect);
+            }
+        }
     }, []);
 
     useEffect(() => {
