@@ -4,6 +4,7 @@ import React, { useState }  from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Rotas from './Componentes/Layout/Rotas';
 import Perfil from './Componentes/Perfil/Perfil';
+import Pergunta from './lib/database/Pergunta';
 
 export default function App() {
   const [usuario, setUsuario] = useState("");
@@ -18,7 +19,7 @@ export default function App() {
   DeviceEventEmitter.addListener("event.DeslogarUsuario", (idUsuario) => {
     setUsuario("");
   })
-
+  
   return (
     <NavigationContainer>
     <Rotas usuario={usuario} />

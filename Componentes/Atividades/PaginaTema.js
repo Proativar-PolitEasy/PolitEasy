@@ -32,7 +32,7 @@ function PaginaTema({ route, navigation }) {
                             </TouchableOpacity>
                         </View>
                         <View style={stylesTemas.paginaTemaItemContainer}>
-                            <TouchableOpacity onPress={() => navigation.navigate("Quizz")}>
+                            <TouchableOpacity onPress={() => navigation.navigate("Quizz", { idTemaEscolhido: temaEscolhido["id"] })}>
                                 <View style={stylesTemas.paginaTemaItem}>
                                     <Text>Quiz</Text>
                                 </View>
