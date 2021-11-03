@@ -5,12 +5,12 @@ import Botao from '../Util/Botao';
 import CampoTexto from '../Util/CampoTexto';
 import stylesForm from '../../Stylesheets/stylesForm';
 import Pergunta from '../../lib/database/Pergunta';
-
+import Alternativa from '../../lib/database/Pergunta';
 
 const CadastrarPergunta = ({ route, navigation }) => {
     const [pergunta, setPergunta] = useState({
         "enunciado": "",
-        "alternativas": "",
+        "alternativas": [],
         "resposta": "",
         "tema": "",
     });
@@ -22,11 +22,32 @@ const CadastrarPergunta = ({ route, navigation }) => {
         setPergunta(perguntaAntiga);
     }
 
+    const InserirAlternativa = (texto, letra) => {
+        const alternativas = pergunta["alternativas"];
+        const alternativaMesmaLetra = alternativas.find(alt => alt["letra"] === letra);
+        const novaAlternativa = Pergunta.CriarAlternativa(texto, letra);
+        const perguntaAntiga = pergunta;
+
+        if (alternativaMesmaLetra) {
+            alternativas[alternativas.indexOf(alternativaMesmaLetra)] = novaAlternativa;
+        } else {
+            alternativas.push(novaAlternativa);
+        }
+
+        perguntaAntiga["alternativas"] = alternativas;
+        setPergunta(perguntaAntiga);
+    }
+
+
     const ValidaDados = () => {
         console.log(pergunta);
         // Checar algum campo não preenchido
         if (pergunta["enunciado"].length === 0
-            || pergunta["alternativas"].length === 0
+            || pergunta["alternativas"][0].length === 0
+            || pergunta["alternativas"][1].length === 0
+            || pergunta["alternativas"][2].length === 0
+            || pergunta["alternativas"][3].length === 0
+            || pergunta["alternativas"][4].length === 0
             || pergunta["resposta"].length === 0
             || pergunta["tema"].length === 0) {
             return false;
@@ -51,10 +72,14 @@ const CadastrarPergunta = ({ route, navigation }) => {
             <View style={stylesForm.containerCadastro}>
                 <Text style={stylesForm.heading}>PERGUNTAS</Text>
 
-                <CampoTexto campo="enunciado" tipo="texto" callbackEntrada={(texto) => EditarPergunta("enunciado", texto)} />
-                <CampoTexto campo="alternativas" tipo="texto" callbackEntrada={(texto) => EditarPergunta("alternativas", texto)} />
-                <CampoTexto campo="resposta" tipo="texto" callbackEntrada={(texto) => EditarPergunta("resposta", texto)} />
-                <CampoTexto campo="tema" tipo="texto" callbackEntrada={(texto) => EditarPergunta("tema", texto)} />
+                <CampoTexto campo="Enunciado" tipo="texto" callbackEntrada={(texto) => EditarPergunta("enunciado", texto)} />
+                <CampoTexto campo="Alternativa A" tipo="texto" callbackEntrada={(texto) => InserirAlternativa(texto, 'A')} />
+                <CampoTexto campo="Alternativa B" tipo="texto" callbackEntrada={(texto) => InserirAlternativa(texto, 'B')} />
+                <CampoTexto campo="Alternativa C" tipo="texto" callbackEntrada={(texto) => InserirAlternativa(texto, 'C')} />
+                <CampoTexto campo="Alternativa D" tipo="texto" callbackEntrada={(texto) => InserirAlternativa(texto, 'D')} />
+                <CampoTexto campo="Alternativa E" tipo="texto" callbackEntrada={(texto) => InserirAlternativa(texto, 'E')} />
+                <CampoTexto campo="Resposta" tipo="texto" callbackEntrada={(texto) => EditarPergunta("resposta", texto)} />
+                <CampoTexto campo="Tema" tipo="texto" callbackEntrada={(texto) => EditarPergunta("tema", texto)} />
 
                 <Botao title="CADASTRAR" onPress={Cadastrar} />
             </View>

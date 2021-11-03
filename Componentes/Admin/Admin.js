@@ -7,16 +7,17 @@ import Base from '../Barra_nav/Barra'
 function Admin({ route, navigation }) {
     return (
 
-        <View style={{ flex: 1,}}>
+        <View style={{ flex: 1, }}>
             <View style={{ width: '100%', height: '100%', backgroundColor: "#16abb2", alignItems: 'center', justifyContent: "space-around" }}>
 
                 <Text style={estilos.titulo}> {"\n"}  Admin   </Text>
-                <TouchableOpacity onPress={() => { navigation.navigate('CadastrarPergunta') }} style={[estilos.sombra, estilos.btn]}>
-                    <Text style={estilos.txtbtn}>Cadastrar Pergunta</Text>
-                </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => { navigation.navigate('CadastrarTema') }} style={[estilos.sombra, estilos.btn]}>
                     <Text style={estilos.txtbtn}>Cadastrar Tema</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => { navigation.navigate('CadastrarPergunta') }} style={[estilos.sombra, estilos.btn]}>
+                    <Text style={estilos.txtbtn}>Cadastrar Pergunta</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => { navigation.navigate('ExcluiPergunta') }} style={[estilos.sombra, estilos.btn]}>
