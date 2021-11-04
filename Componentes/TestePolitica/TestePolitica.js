@@ -22,13 +22,19 @@ function TestePolitica({route, navigation}) {
 
                 {/* CORPO DO TESTEEEEEE */}
                 <View style={{height:'71%', width:'100%', backgroundColor:'#cad3e0', justifyContent:'center', alignItems:'center'}}>
-                    <View style={{width:'80%', height:'10%', flexDirection:'row'}}>
-                        <View style={{width:'20%', height:'100%', backgroundColor:'#ff1616', borderTopLeftRadius: 20, borderBottomLeftRadius:25}}></View>
-                        <View style={{width:'20%', height:'100%', backgroundColor:'#ff5757'}}></View>
-                        <View style={{width:'20%', height:'100%', backgroundColor:'grey'}}></View>
-                        <View style={{width:'20%', height:'100%', backgroundColor:'#7ed957'}}></View>
-                        <View style={{width:'20%', height:'100%', backgroundColor:'#009942', borderTopRightRadius:25, borderBottomEndRadius:25}}></View>
-                    </View>
+                    <View style={{height:'100%', width:'100%', backgroundColor:'blue', alignItems:'center'}}>
+
+                        <View style={{height:'20%', width:'90%', borderRadius:10, backgroundColor:'lightblue'}}>
+                            <Text style={{textAlignVertical:'center', textAlign:'center'}}>VOCÊ É A FAVOR DO ABORTO?</Text>
+                        </View>
+                        <View style={{width:'80%', height:'10%', flexDirection:'row'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#ff1616', borderTopLeftRadius: 20, borderBottomLeftRadius:25}}></TouchableOpacity>
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#ff5757'}}></TouchableOpacity>
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'grey'}}></TouchableOpacity>
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#7ed957'}}></TouchableOpacity>
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#009942', borderTopRightRadius:25, borderBottomEndRadius:25}}></TouchableOpacity>
+                        </View>
+                    </View>                    
                 </View>
 
             </View>
