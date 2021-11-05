@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity, ScrollView} from 'react-native';
-import { AntDesign, FontAwesome5, FontAwesome, Ionicons } from '@expo/vector-icons';
+import { AntDesign, FontAwesome5, EvilIcons, Ionicons, Entypo } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 
 function TestePolitica({route, navigation}) {
@@ -21,19 +21,38 @@ function TestePolitica({route, navigation}) {
                 </View>
 
                 {/* CORPO DO TESTEEEEEE */}
-                <View style={{height:'71%', width:'100%', backgroundColor:'#cad3e0', justifyContent:'center', alignItems:'center'}}>
-                    <View style={{height:'100%', width:'100%', backgroundColor:'blue', alignItems:'center'}}>
+                <View style={{height:'71%', width:'100%', backgroundColor:'#16abb2', justifyContent:'center', alignItems:'center'}}>
+                    <View style={{height:'100%', width:'100%', alignItems:'center',}}>
 
-                        <View style={{height:'20%', width:'90%', borderRadius:10, backgroundColor:'lightblue'}}>
-                            <Text style={{textAlignVertical:'center', textAlign:'center'}}>VOCÊ É A FAVOR DO ABORTO?</Text>
+                        <View style={{height:'20%', width:'90%', borderRadius:10, backgroundColor:'lightblue', marginTop:'20%'}}>
+                            <Text style={{textAlignVertical:'center', textAlign:'center'}}>PERGUNTA POLÍTICA</Text>
                         </View>
-                        <View style={{width:'80%', height:'10%', flexDirection:'row'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
-                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#ff1616', borderTopLeftRadius: 20, borderBottomLeftRadius:25}}></TouchableOpacity>
-                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#ff5757'}}></TouchableOpacity>
-                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'grey'}}></TouchableOpacity>
-                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#7ed957'}}></TouchableOpacity>
+                        <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'10%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#de1414', borderTopLeftRadius: 20, borderBottomLeftRadius:25}}></TouchableOpacity>
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#f54747'}}></TouchableOpacity>
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#857c7a'}}></TouchableOpacity>
+                            <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#72c44f'}}></TouchableOpacity>
                             <TouchableOpacity style={{width:'20%', height:'100%', backgroundColor:'#009942', borderTopRightRadius:25, borderBottomEndRadius:25}}></TouchableOpacity>
                         </View>
+                        <View style={{width:'80%', height:'10%', flexDirection:'row-reverse',justifyContent:'space-between'}}>
+                            <Text>Concordo</Text>
+                            <Text>Neutro</Text>
+                            <Text>Discordo</Text>
+                        </View>
+
+                        <TouchableOpacity onPress={()=>Alert.alert('Como funciona?','Clique nos vermelhos de acordo com o nível de sua discordância e nos verdes de acordo com sua concordância')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
+                            <Ionicons name="help-circle-outline" size={50} color="#092838"/>
+                        </TouchableOpacity>
+
+                        <View style={{width:'90%', height:'21%', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+                            <TouchableOpacity>
+                                <Entypo name="arrow-with-circle-left" size={65} color="#092838"/>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <Entypo name="arrow-with-circle-right" size={65} color="#092838"/>
+                            </TouchableOpacity>
+                        </View>
+
                     </View>                    
                 </View>
 
