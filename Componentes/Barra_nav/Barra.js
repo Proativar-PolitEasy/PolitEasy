@@ -33,7 +33,7 @@ export default function({ navigation }) {
                 </TouchableOpacity>
             </View>
             <View style={{flexGrow:1,padding:10}}>
-                <TouchableOpacity onPress={() => navigation.navigate("TestePolitica")}>
+            <TouchableOpacity onPress={() => navigation.navigate("TestePolitica")}>
                     <Image
                         source={require('../../assets/buzzfeed.png')}
                         style={{width:"100%",height:'100%',resizeMode:'contain'}}/>

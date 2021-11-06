@@ -22,6 +22,7 @@ import ExcluiTema from '../Admin/ExcluiTema';
 import ExcluiPergunta from '../Admin/ExcluiPergunta';
 import CadastrarTema from '../Admin/FormCadastrarTema';
 import CadastrarPergunta from '../Admin/FormCadastrarPergunta';
+import Perguntas from '../TestePolitica/Perguntas';
 
 const Routes = createStackNavigator();
 
@@ -52,6 +53,7 @@ function Rotas(props) {
       <Routes.Screen name="ExcluiPergunta" component={ExcluiPergunta} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name="ExcluiTema" component={ExcluiTema} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name="ExcluiUsuario" component={ExcluiUsuario} initialParams={{ idUsuario: props.usuario }} />
+      <Routes.Screen name="Perguntas" component={Perguntas} initialParams={{ idUsuario: props.usuario }} />
     </Routes.Navigator>
   );
 }
