@@ -1,10 +1,27 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity, ScrollView } from 'react-native';
 import { AntDesign, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
+import Usuario from '../../lib/database/Usuario';
 
 function Perfil({ route, navigation }) {
+    const logado = eval(route.params.idUsuario);
+    const [isAdmin, setAdmin] = useState(false);
+
+    useEffect(() => {
+        const idUsuario = route.params.idUsuario;
+
+        if (logado) {
+            Usuario.RetornarUsuarioPorId(idUsuario)
+            .then((user) => {
+                if (user) {
+                    setAdmin(user["administrador"]);
+                }
+            })
+        }
+    }, [])
+
     return (
         <View style={{ flex: 1, }}>
             <View style={{ width: '100%', height: '91%', backgroundColor: '#16abb2', flexGrow: 1 }}>
@@ -21,15 +38,17 @@ function Perfil({ route, navigation }) {
                     <View style={{ flexGrow: 1, }}></View>
                     <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
                         <FontAwesome name='user-circle' size={200} color='#545454' />
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={() => { navigation.navigate('Login') }} style={[estilos.sombra, estilos.btn]}>
-                                <Text style={estilos.txtbtn}>LOGIN</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={[estilos.sombra, estilos.btn]}>
-                                <Text style={estilos.txtbtn}>CRIAR CONTA</Text>
-                            </TouchableOpacity>
-
-                        </View>
+                        {   logado 
+                            ||
+                            <View style={{ flexDirection: 'row' }}>
+                                <TouchableOpacity onPress={() => { navigation.navigate('Login') }} style={[estilos.sombra, estilos.btn]}>
+                                    <Text style={estilos.txtbtn}>LOGIN</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={[estilos.sombra, estilos.btn]}>
+                                    <Text style={estilos.txtbtn}>CRIAR CONTA</Text>
+                                </TouchableOpacity>
+                            </View>
+                        }
                     </View>
                     <View style={{ flexGrow: 1, }}>
                     </View>
@@ -42,12 +61,14 @@ function Perfil({ route, navigation }) {
                     <View style={{ width: '100%', height: '60%', flexDirection: 'row' }}>
                         <View style={{ flexGrow: 1, }}></View>
                         <View style={{ flexGrow: 1, alignItems: 'center' }}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <TouchableOpacity onPress={() => { navigation.navigate('Admin') }} style={[estilos.sombra, estilos.btn]}>
-                                    <Text style={estilos.txtbtn}>ADMIN</Text>
-                                </TouchableOpacity>
-                            </View>
-
+                            {
+                                !isAdmin ||
+                                <View style={{ flexDirection: 'row' }}>
+                                        <TouchableOpacity onPress={() => { navigation.navigate('Admin') }} style={[estilos.sombra, estilos.btn]}>
+                                            <Text style={estilos.txtbtn}>ADMIN</Text>
+                                        </TouchableOpacity>
+                                </View>
+                            }
                         </View>
                         <View style={{ flexGrow: 1, }}>
                         </View>
