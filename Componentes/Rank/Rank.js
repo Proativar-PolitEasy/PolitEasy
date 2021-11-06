@@ -1,28 +1,55 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { FontAwesome5, FontAwesome, AntDesign, Fontisto } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 import Sobre from '../Sobre/Sobre'
+import Pontuacao from '../../lib/database/Pontuacao';
+import Usuario from '../../lib/database/Usuario';
 
 function Config({ route, navigation }) {
-    let itens = []
-    for (let index = 0; index < 99; index++) {
-        itens.push(
-            < View key={index} >
-                <View style={{ width: '100%', height: 1, backgroundColor: 'black' }}></View>
-                <View style={{ width: '100%', height: 30, flexDirection: 'row' }}>
-                    <View style={{ width: '12%', height: '100%', backgroundColor: '#ff6554', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={estilos.numrank}>#{index+1}</Text>{/* POSIÇÃO RANK */}
-                    </View>
-                    <View style={{ width: '65%', height: '100%', backgroundColor: '#ffb8b0', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={estilos.txtrank}>NOME DO USUARIO</Text>{/* NOME DO USUÁRIO */}
-                    </View>
-                    <View style={{ width: '23%', height: '100%', backgroundColor: '#ff6554', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={estilos.numrank}>pontos</Text>{/* POSIÇÃO RANK */}
-                    </View>
-                </View></View>)
-    }
+    const [itens, setItens] = useState([]);
+
+    useEffect(() => {
+        let rankingTotal = [];
+        let top100Usuarios = [];
+
+        Pontuacao.RetornarPontuacoes()
+        .then((pts) => {
+            // Ordenar pontuações pela quantia de pontos
+            rankingTotal = Array.sort(pts, (pt1, pt2) => {
+                if (Number.parseInt(pt1["pontuacao"], 10) > Number.parseInt(pt2["pontuacao"], 10)) {
+                    return 1;
+                } else if (Number.parseInt(pt1["pontuacao"], 10) < Number.parseInt(pt2["pontuacao"], 10)) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+
+            // Limitar pontuações para 100 registros
+            top100Usuarios = rankingTotal.slice(0, 99).map(rank => rank["nome_usuario"] = Usuario.RetornarUsuarioPorId(rank["id_usuario"]));
+
+            setItens(top100Usuarios.map(item, index =>
+                < View key={index} >
+                    <View style={{ width: '100%', height: 1, backgroundColor: 'black' }}></View>
+                    <View style={{ width: '100%', height: 30, flexDirection: 'row' }}>
+                        <View style={{ width: '12%', height: '100%', backgroundColor: '#ff6554', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={estilos.numrank}>#{index+1}</Text>{index + 1}
+                        </View>
+                        <View style={{ width: '65%', height: '100%', backgroundColor: '#ffb8b0', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={estilos.txtrank}>{}</Text>{item["nome_usuario"]}
+                        </View>
+                        <View style={{ width: '23%', height: '100%', backgroundColor: '#ff6554', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={estilos.numrank}>pontos</Text>{item["pontuacao"]}
+                        </View>
+                    </View></View>
+            ));
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, []);
 
     return (
         <View style={{ flex: 1, }}>
@@ -45,7 +72,7 @@ function Config({ route, navigation }) {
 
                     <View style={{ width: '80%', height: '85%', backgroundColor: '#96352a', flexDirection: 'row', alignItems: 'flex-start', marginTop: -1, borderColor: 'black', borderWidth: 1 }}>
                         <ScrollView>
-                            {itens}
+                            { itens || <Text>Carregando...</Text> }
                         </ScrollView>
                     </View>
                 </View>
