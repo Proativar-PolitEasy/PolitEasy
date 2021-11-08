@@ -18,6 +18,7 @@ function Config({ route, navigation }) {
         let consultasBanco = [];
 
         if (logado) {
+            // Se o usuário está logado, consultar sua posição no ranking, no banco, para apresentar na tela.
             Pontuacao.RetornarPosicao(route.params.idUsuario)
             .then(posicaoBanco => {
                 setPosicao(posicaoBanco);
@@ -28,6 +29,7 @@ function Config({ route, navigation }) {
         }
 
         if (itens.length === 0) {
+            // Consultar pontuações no banco para mostrar o top 100
             Pontuacao.RetornarPontuacoes()
             .then((pts) => {
                 // Ordenar pontuações pela quantia de pontos
@@ -55,6 +57,7 @@ function Config({ route, navigation }) {
                     }));
                 }
 
+                // Aguardar a identificação de cada usuário para depois mostrar na tela
                 Promise.all(consultasBanco)
                 .then(consulta => {
                     setItens(top100Usuarios.map((item, index) =>
