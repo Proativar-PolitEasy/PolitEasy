@@ -9,6 +9,7 @@ import Usuario from '../../lib/database/Usuario';
 import ModalAvatar from './ModalAvatar';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Pontuacao from '../../lib/database/Pontuacao';
+import bcrypt from 'bcryptjs';
 
 const FormatarData = (data) => {
     const dia = data.getDate().toString();
@@ -86,10 +87,16 @@ const FormCadastro = ({ route, navigation }) => {
                     console.log("Email já existe no banco.");
                 }
                 else {
-                    idUsuario = Usuario.SalvarUsuario(usuario);
-                    Usuario.SalvarAvatar(idUsuario, avatar);
-                    Pontuacao.SalvarPontuacao(idUsuario, 0);
-                    navigation.navigate("Home_oficial");
+                    // Criptografa a senha e salva no banco.
+                    bcrypt.genSalt(10, (error, salt) => {
+                        bcrypt.hash(usuario["senha"], salt, (err, hash) => {
+                            usuario["senha"] = hash;
+                            idUsuario = Usuario.SalvarUsuario(usuario);
+                            Usuario.SalvarAvatar(idUsuario, avatar);
+                            Pontuacao.SalvarPontuacao(idUsuario, 0);
+                            navigation.navigate("Home_oficial");
+                        });
+                    });
                 }
     
             })

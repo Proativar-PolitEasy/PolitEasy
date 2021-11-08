@@ -13,8 +13,10 @@ function PaginaTema({ route, navigation }) {
 
     const acessarQuiz = () => {
         if (!logado) {
+            // Redirecionar para página de login se não estiver logada
             navigation.navigate("Login");
         } else {
+            // Acessar a página de Quiz
             navigation.navigate("Quizz", { idTemaEscolhido: temaEscolhido["id"] })
         }
     }
