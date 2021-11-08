@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, Image, ImageBackground, Button, Alert, Touchabl
 import { AntDesign, MaterialCommunityIcons, FontAwesome5, FontAwesome, Ionicons } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 import Pergunta from '../../lib/database/Pergunta';
+import Botao from '../Util/Botao';
 
 function Quizz({route, navigation: { goBack }}) {
     const { idTemaEscolhido } = route.params;
@@ -19,10 +20,16 @@ function Quizz({route, navigation: { goBack }}) {
         
         Pergunta.RetornarPerguntasPorTema(idTemaEscolhido)
         .then((perguntas) => {
-            // Seleciona pergunta aleatória
+            // Achar questões aleatórias sobre o tema.
             for (let i = 1; i <= numeroQuestoes; i++) {
+                // Math.floor e Math.random são usados para achar uma questão aleatória sobre o tema.
                 indexPergunta = Math.floor(Math.random() * perguntas.length);
+                
+                // Salvar essa questão encontrada, colocando uma nova propriedade "acertou" para que seja possível 
+                // determinar esse valor mais tarde.
                 tempQuestoes.push(Object.assign(perguntas[indexPergunta], { "acertou": null }));
+                
+                // Eliminar a questão obtida para não obter perguntas repetidas.
                 perguntas.splice(indexPergunta, 1);
             }
             
@@ -42,8 +49,8 @@ function Quizz({route, navigation: { goBack }}) {
         // Salvar valores na memória.
         setQuestoes(questoesValorAntigo);
         
-        // Enviar próxima pergunta para o usuário responder.
-        AlternarPergunta();
+        // Notificar usuário se acertou ou errou.
+        setNotificacao(letra === pergunta["resposta"] ? "Parabéns, você acertou!" : "Que pena, você errou!");
     }
     
     const AlternarPergunta = () => {
@@ -115,9 +122,15 @@ function Quizz({route, navigation: { goBack }}) {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity onPress={()=>Alert.alert('COMO JOGAR?','Para jogar é muito simples, serão feitas 10 perguntas sobre o tema escolhido e para cada pergunta terá 4 opções, sendo uma delas a opção correta e 3 erradas. O jogador deve ler, interpretar as questões e tentar responder o maior número de questões da maneira correta. Leia os textos de apoio e teste seu conhecimento em nossos quizes preparados especialmente para testar suas habilidades, boa sorte!!!!')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
-                <Ionicons name="help-circle-outline" size={50} color="#6d767d"/>
-            </TouchableOpacity>
+            {
+                notificacao
+                ? 
+                    <Botao title="Continuar" onPress={() => AlternarPergunta()}>
+                :
+                    <TouchableOpacity onPress={()=>Alert.alert('COMO JOGAR?','Para jogar é muito simples, serão feitas 10 perguntas sobre o tema escolhido e para cada pergunta terá 4 opções, sendo uma delas a opção correta e 3 erradas. O jogador deve ler, interpretar as questões e tentar responder o maior número de questões da maneira correta. Leia os textos de apoio e teste seu conhecimento em nossos quizes preparados especialmente para testar suas habilidades, boa sorte!!!!')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
+                    <Ionicons name="help-circle-outline" size={50} color="#6d767d"/>
+                    </TouchableOpacity>
+            }
 
         </ImageBackground>
 
