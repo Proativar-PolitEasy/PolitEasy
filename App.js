@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Rotas from './Componentes/Layout/Rotas';
 import Perfil from './Componentes/Perfil/Perfil';
 import Pergunta from './lib/database/Pergunta';
+import Pontuacao from './lib/database/Pontuacao';
 
 export default function App() {
   const [usuario, setUsuario] = useState("");

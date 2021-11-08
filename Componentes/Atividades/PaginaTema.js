@@ -9,8 +9,15 @@ import Tema from '../../lib/database/Tema';
 
 function PaginaTema({ route, navigation }) {
     const { temaEscolhido } = route.params;
+    const logado = route.params.idUsuario.length !== 0;
 
-    console.log(temaEscolhido);
+    const acessarQuiz = () => {
+        if (!logado) {
+            navigation.navigate("Login");
+        } else {
+            navigation.navigate("Quizz", { idTemaEscolhido: temaEscolhido["id"] })
+        }
+    }
 
     return (
         <ImageBackground source={require('../../assets/bg.jpg')} style={{ flex: 1, resizeMode: 'cover' }}>
@@ -32,7 +39,7 @@ function PaginaTema({ route, navigation }) {
                             </TouchableOpacity>
                         </View>
                         <View style={stylesTemas.paginaTemaItemContainer}>
-                            <TouchableOpacity onPress={() => navigation.navigate("Quizz", { idTemaEscolhido: temaEscolhido["id"] })}>
+                            <TouchableOpacity onPress={() => acessarQuiz()}>
                                 <View style={stylesTemas.paginaTemaItem}>
                                     <Text>Quiz</Text>
                                 </View>

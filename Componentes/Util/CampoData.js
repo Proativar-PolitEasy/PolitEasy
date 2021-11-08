@@ -26,7 +26,7 @@ const CampoData = (props) => {
         const ano = data.getFullYear();
 
         const diaComZero = dia.length == 1 ? "0" + dia : dia;
-        const mesComZero = mes.length == 1 ? "0" + mes : ano;
+        const mesComZero = mes.length == 1 ? "0" + mes : mes;
 
         return diaComZero + "/" + mesComZero + "/" + ano;
     }

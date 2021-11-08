@@ -1,13 +1,15 @@
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity, ScrollView } from 'react-native';
 import { AntDesign, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 import Usuario from '../../lib/database/Usuario';
 
 function Perfil({ route, navigation }) {
-    const logado = eval(route.params.idUsuario);
+    const logado = route.params.idUsuario.length !== 0;
     const [isAdmin, setAdmin] = useState(false);
+
+    console.log(logado);
 
     useEffect(() => {
         const idUsuario = route.params.idUsuario;
@@ -39,7 +41,23 @@ function Perfil({ route, navigation }) {
                     <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
                         <FontAwesome name='user-circle' size={200} color='#545454' />
                         {   logado 
-                            ||
+                            ?   !isAdmin
+                                ||
+                                <View>
+                                    <View style={{ width: '100%', height: '60%', flexDirection: 'row' }}>
+                                        <View style={{ flexGrow: 1, }}></View>
+                                        <View style={{ flexGrow: 1, alignItems: 'center' }}>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                        <TouchableOpacity onPress={() => { navigation.navigate('Admin') }} style={[estilos.sombra, estilos.btn]}>
+                                                            <Text style={estilos.txtbtn}>ADMIN</Text>
+                                                        </TouchableOpacity>
+                                                </View>
+                                        </View>
+                                        <View style={{ flexGrow: 1, }}>
+                                        </View>
+                                    </View>
+                                </View>
+                            :
                             <View style={{ flexDirection: 'row' }}>
                                 <TouchableOpacity onPress={() => { navigation.navigate('Login') }} style={[estilos.sombra, estilos.btn]}>
                                     <Text style={estilos.txtbtn}>LOGIN</Text>
@@ -54,52 +72,30 @@ function Perfil({ route, navigation }) {
                     </View>
                 </View>
 
-
-                {/*Código do botão admin, informações do perfil  */}
-                <View>
-
-                    <View style={{ width: '100%', height: '60%', flexDirection: 'row' }}>
-                        <View style={{ flexGrow: 1, }}></View>
-                        <View style={{ flexGrow: 1, alignItems: 'center' }}>
-                            {
-                                !isAdmin ||
-                                <View style={{ flexDirection: 'row' }}>
-                                        <TouchableOpacity onPress={() => { navigation.navigate('Admin') }} style={[estilos.sombra, estilos.btn]}>
-                                            <Text style={estilos.txtbtn}>ADMIN</Text>
-                                        </TouchableOpacity>
-                                </View>
-                            }
+                {
+                    !logado ||
+                    <View style={{ flexGrow: 1, height: '32%' }}>
+                        <View style={{ width: '100%', height: '20%' }}>
+                            <Text style={{ fontSize: 30, textAlign: 'center', textAlignVertical: 'center', textDecorationLine: 'underline' }}>ESTATÍSTICAS</Text>
                         </View>
-                        <View style={{ flexGrow: 1, }}>
+                        <View style={{ width: '100%', height: '80%', flexDirection: 'row' }}>
+                            <View style={{ width: '10%', height: '100%', }}></View>
+                            <View style={{ width: '40%', height: '100%', alignItems: 'flex-start', justifyContent: 'space-around' }}>
+                                <Text style={estilos.txtestatistica}>Escolaridade:</Text>
+                                <Text style={estilos.txtestatistica}>Perguntas:</Text>
+                                <Text style={estilos.txtestatistica}>Acertos:</Text>
+                                <Text style={estilos.txtestatistica}>Ranking:</Text>
+                            </View>
+                            <View style={{ width: '40%', height: '100%', alignItems: 'flex-end', justifyContent: 'space-around' }}>
+                                <Text style={estilos.infoestatistica}>Aluno</Text>
+                                <Text style={estilos.infoestatistica}>250</Text>{/* AQUI É AS INFORMAÇÕES DO PERFIL !! */}
+                                <Text style={estilos.infoestatistica}>170</Text>
+                                <Text style={estilos.infoestatistica}>Diamante</Text>
+                            </View>
+                            <View style={{ width: '10%', height: '100%', }}></View>
                         </View>
                     </View>
-                </View>
-
-
-
-
-
-                <View style={{ flexGrow: 1, height: '32%' }}>
-                    <View style={{ width: '100%', height: '20%' }}>
-                        <Text style={{ fontSize: 30, textAlign: 'center', textAlignVertical: 'center', textDecorationLine: 'underline' }}>ESTATÍSTICAS</Text>
-                    </View>
-                    <View style={{ width: '100%', height: '80%', flexDirection: 'row' }}>
-                        <View style={{ width: '10%', height: '100%', }}></View>
-                        <View style={{ width: '40%', height: '100%', alignItems: 'flex-start', justifyContent: 'space-around' }}>
-                            <Text style={estilos.txtestatistica}>Escolaridade:</Text>
-                            <Text style={estilos.txtestatistica}>Perguntas:</Text>
-                            <Text style={estilos.txtestatistica}>Acertos:</Text>
-                            <Text style={estilos.txtestatistica}>Ranking:</Text>
-                        </View>
-                        <View style={{ width: '40%', height: '100%', alignItems: 'flex-end', justifyContent: 'space-around' }}>
-                            <Text style={estilos.infoestatistica}>Aluno</Text>
-                            <Text style={estilos.infoestatistica}>250</Text>{/* AQUI É AS INFORMAÇÕES DO PERFIL !! */}
-                            <Text style={estilos.infoestatistica}>170</Text>
-                            <Text style={estilos.infoestatistica}>Diamante</Text>
-                        </View>
-                        <View style={{ width: '10%', height: '100%', }}></View>
-                    </View>
-                </View>
+                }
             </View>
             <View>
                 <Base navigation={navigation} />

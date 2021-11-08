@@ -9,46 +9,76 @@ import Usuario from '../../lib/database/Usuario';
 
 function Config({ route, navigation }) {
     const [itens, setItens] = useState([]);
+    const [posicao, setPosicao] = useState(null);
+    const logado = route.params.idUsuario.length !== 0;
 
     useEffect(() => {
         let rankingTotal = [];
         let top100Usuarios = [];
+        let consultasBanco = [];
 
-        Pontuacao.RetornarPontuacoes()
-        .then((pts) => {
-            // Ordenar pontuações pela quantia de pontos
-            rankingTotal = Array.sort(pts, (pt1, pt2) => {
-                if (Number.parseInt(pt1["pontuacao"], 10) > Number.parseInt(pt2["pontuacao"], 10)) {
-                    return 1;
-                } else if (Number.parseInt(pt1["pontuacao"], 10) < Number.parseInt(pt2["pontuacao"], 10)) {
-                    return -1;
-                } else {
-                    return 0;
+        if (logado) {
+            Pontuacao.RetornarPosicao(route.params.idUsuario)
+            .then(posicaoBanco => {
+                setPosicao(posicaoBanco);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+
+        if (itens.length === 0) {
+            Pontuacao.RetornarPontuacoes()
+            .then((pts) => {
+                // Ordenar pontuações pela quantia de pontos
+                rankingTotal = pts.sort((pt1, pt2) => {
+                    if (Number.parseInt(pt1["pontuacao"], 10) > Number.parseInt(pt2["pontuacao"], 10)) {
+                        return -1;
+                    } else if (Number.parseInt(pt1["pontuacao"], 10) < Number.parseInt(pt2["pontuacao"], 10)) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+
+                // Limitar pontuações para 100 registros
+                top100Usuarios = rankingTotal.slice(0, 99);
+                
+                for (let i = 0; i < top100Usuarios.length; i++) {
+                    consultasBanco.push(new Promise((resolve, reject) => {
+                        Usuario.RetornarUsuarioPorId(top100Usuarios[i]["id_usuario"])
+                        .then(usuario => {
+                            top100Usuarios[i]["nome_usuario"] = usuario["nome"];
+                            resolve(usuario);
+                        })
+                        .catch(err => console.log(err));
+                    }));
                 }
-            });
 
-            // Limitar pontuações para 100 registros
-            top100Usuarios = rankingTotal.slice(0, 99).map(rank => rank["nome_usuario"] = Usuario.RetornarUsuarioPorId(rank["id_usuario"]));
-
-            setItens(top100Usuarios.map(item, index =>
-                < View key={index} >
-                    <View style={{ width: '100%', height: 1, backgroundColor: 'black' }}></View>
-                    <View style={{ width: '100%', height: 30, flexDirection: 'row' }}>
-                        <View style={{ width: '12%', height: '100%', backgroundColor: '#ff6554', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={estilos.numrank}>#{index+1}</Text>{index + 1}
+                Promise.all(consultasBanco)
+                .then(consulta => {
+                    setItens(top100Usuarios.map((item, index) =>
+                        <View key={index}>
+                            <View style={{ width: '100%', height: 1, backgroundColor: 'black' }}></View>
+                            <View style={{ width: '100%', height: 30, flexDirection: 'row' }}>
+                                <View style={{ width: '12%', height: '100%', backgroundColor: '#ff6554', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={estilos.numrank}>#{index + 1}</Text>
+                                </View>
+                                <View style={{ width: '65%', height: '100%', backgroundColor: '#ffb8b0', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={estilos.txtrank}>{item["nome_usuario"]}</Text>
+                                </View>
+                                <View style={{ width: '23%', height: '100%', backgroundColor: '#ff6554', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={estilos.numrank}>{item["pontuacao"]} pts</Text>
+                                </View>
+                            </View>
                         </View>
-                        <View style={{ width: '65%', height: '100%', backgroundColor: '#ffb8b0', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={estilos.txtrank}>{}</Text>{item["nome_usuario"]}
-                        </View>
-                        <View style={{ width: '23%', height: '100%', backgroundColor: '#ff6554', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={estilos.numrank}>pontos</Text>{item["pontuacao"]}
-                        </View>
-                    </View></View>
-            ));
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+                    ));
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
     }, []);
 
     return (
@@ -59,8 +89,14 @@ function Config({ route, navigation }) {
                     <View style={{ width: '100%', height: '80%', alignItems: 'center', justifyContent: 'flex-end' }}>
                         <FontAwesome5 name="crown" size={100} color="#f8a62a" />
                     </View>
-                    <View style={{ width: '100%', height: '20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                        <Text style={estilos.texto}>Sua colocação no ranking: </Text><Text style={estilos.posição}>#7°</Text>
+                    <View style={{ width: '100%', height: '30%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                        {
+                            !logado ||
+                            <View style={{display: "flex", flexDirection: "row", marginBottom: "5%"}}>
+                                <Text style={estilos.texto}>Sua colocação no ranking: </Text>
+                                <Text style={estilos.posição}>#{posicao ? posicao : "0"}</Text>
+                            </View>
+                        }
                     </View>
                 </View>
 

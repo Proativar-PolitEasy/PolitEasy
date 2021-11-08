@@ -7,6 +7,8 @@ import Botao from '../Util/Botao';
 import stylesForm from '../../Stylesheets/stylesForm';
 import Usuario from '../../lib/database/Usuario';
 import ModalAvatar from './ModalAvatar';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
+import Pontuacao from '../../lib/database/Pontuacao';
 
 const FormatarData = (data) => {
     const dia = data.getDate().toString();
@@ -14,7 +16,7 @@ const FormatarData = (data) => {
     const ano = data.getFullYear();
 
     const diaComZero = dia.length == 1 ? "0" + dia : dia;
-    const mesComZero = mes.length == 1 ? "0" + mes : ano;
+    const mesComZero = mes.length == 1 ? "0" + mes : mes;
 
     return diaComZero + "/" + mesComZero + "/" + ano;
 }
@@ -86,6 +88,7 @@ const FormCadastro = ({ route, navigation }) => {
                 else {
                     idUsuario = Usuario.SalvarUsuario(usuario);
                     Usuario.SalvarAvatar(idUsuario, avatar);
+                    Pontuacao.SalvarPontuacao(idUsuario, 0);
                     navigation.navigate("Home_oficial");
                 }
     
