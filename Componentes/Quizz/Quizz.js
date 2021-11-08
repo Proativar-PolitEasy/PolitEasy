@@ -7,14 +7,26 @@ import Pergunta from '../../lib/database/Pergunta';
 
 function Quizz({route, navigation: { goBack }}) {
     const { idTemaEscolhido } = route.params;
+    const [questoes, setQuestoes] = useState([]);
     const [pergunta, setPergunta] = useState(null);
     const [notificacao, setNotificacao] = useState("");
+    const questaoAtual = 0; // index de <questoes>
+    const numeroQuestoes = 3; // alterar esse valor conforme necessário
 
     useEffect(() => {
+        const tempQuestoes = [];
+        let indexPergunta;
+        
         Pergunta.RetornarPerguntasPorTema(idTemaEscolhido)
         .then((perguntas) => {
             // Seleciona pergunta aleatória
-            setPergunta(perguntas[Math.floor(Math.random() * perguntas.length)]);
+            for (let i = 1; i <= numeroQuestoes; i++) {
+                indexPergunta = Math.floor(Math.random() * perguntas.length);
+                tempQuestoes.push(Object.assign(perguntas[indexPergunta], { "acertou": null }));
+                perguntas.splice(indexPergunta, 1);
+            }
+            
+            setQuestoes(tempQuestoes);
         })
         .catch((err) => {
             console.log(err);
@@ -22,10 +34,25 @@ function Quizz({route, navigation: { goBack }}) {
     }, [])
 
     const ResponderPergunta = (letra) => {
-        if (letra === pergunta["resposta"]) {
-            setNotificacao("\n\nVocê acertou!");
+        const questoesValorAntigo = questoes;
+        
+        // Achar a pergunta correspondente à respondida, alterar o seu estado "acertou" para o respectivo valor.
+        questoesValorAntigo[questoesValorAntigo.indexOf(pergunta)]["acertou"] = letra === pergunta["resposta"];
+        
+        // Salvar valores na memória.
+        setQuestoes(questoesValorAntigo);
+        
+        // Enviar próxima pergunta para o usuário responder.
+        AlternarPergunta();
+    }
+    
+    const AlternarPergunta = () => {
+        questaoAtual++;
+        
+        if (questaoAtual >= numeroQuestoes) {
+            console.log("Quiz finalizado!");
         } else {
-            setNotificacao("\n\nVocê errou! A resposta era " + pergunta["resposta"]);
+            setPergunta(questoes[questaoAtual]);
         }
     }
 
