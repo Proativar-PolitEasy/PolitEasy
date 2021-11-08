@@ -43,9 +43,7 @@ function Quizz({route, navigation: { goBack }}) {
                 <View style={{height:'100%', width:'60%', justifyContent:"center", alignItems:'center',}}>{/* TITULO */}
                     <Text style={{fontFamily:'Roboto', fontSize:30,}}>QUIZ</Text>
                 </View>
-                <View style={{height:'100%', width:'15%', justifyContent:"center", alignItems:'center',flexDirection:'row',marginRight:"3%"}}>{/* CRONOMETRO */}
-                    <MaterialCommunityIcons name="timer-outline" size={45} color="white"/>
-                    <Text style={{fontFamily:'Roboto', fontSize:30, fontWeight:'bold', color:'white',}}>60'</Text>
+                <View style={{height:'100%', width:'15%', justifyContent:"center", alignItems:'center',flexDirection:'row',marginRight:"3%"}}>
                 </View>
             </View>
 
