@@ -123,15 +123,14 @@ function Quizz({route, navigation: { goBack }}) {
             {
                 notificacao
                 ? 
-                    <Botao title="Continuar" onPress={() => AlternarPergunta()}>
+                    <Botao title="Continuar" onPress={() => AlternarPergunta()} />
                 :
                     <TouchableOpacity onPress={()=>Alert.alert('COMO JOGAR?','Para jogar é muito simples, serão feitas 10 perguntas sobre o tema escolhido e para cada pergunta terá 4 opções, sendo uma delas a opção correta e 3 erradas. O jogador deve ler, interpretar as questões e tentar responder o maior número de questões da maneira correta. Leia os textos de apoio e teste seu conhecimento em nossos quizes preparados especialmente para testar suas habilidades, boa sorte!!!!')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
-                    <Ionicons name="help-circle-outline" size={50} color="#6d767d"/>
+                        <Ionicons name="help-circle-outline" size={50} color="#6d767d"/>
                     </TouchableOpacity>
             }
 
         </ImageBackground>
-
     );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, ImageBackground, Image } from 'react-native';
+import { Text, View, ScrollView, ImageBackground, Image } from 'react-native';
 import { } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra';
 import axios from 'axios';
@@ -8,10 +8,12 @@ export default function Home_oficial({route, navigation}) {
     const [noticias, setNoticias] = useState([]);
     
     useEffect(() => {
+        const k = "2b884b8e8bdd4d8fb3fdaeb682c5de22";
+
         // Obter notícias pela API da Google News
-        axios.get("api_url")
+        axios.get("https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=" + k)
         .then((respostaApi) => {
-            setNoticias(respostaApi["articles"]);
+            setNoticias(respostaApi["data"]["articles"]);
         })
         .catch((erroApi) => {
             console.log(erroApi);
@@ -31,14 +33,14 @@ export default function Home_oficial({route, navigation}) {
                                 <Image source={require('../../assets/noticia.jpg')} style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
                             </View>
                         </View>
-                        <View style={{height:'40%', alignItems:'center'}}>
+                        <ScrollView style={{height:'5%'}}>
                             
                             {
                                 noticias.map(noticia =>
-                                    <View style={{width:'100%', height:'50%', flexDirection:'column', alignItems:'center', justifyContent:'space-around'}}>
-                                        <View style={{width:70, height:70, backgroundColor:'#16abb2', borderRadius:70/2, alignItems:'center', justifyContent:'center'}}>
-                                            <View style={{width:60, height:60, backgroundColor:'grey', borderRadius:99}}>
-                                                { noticia["title"] }
+                                    <View style={{width:'100%', height:'10%', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+                                        <View style={{width:'90%', height:70, alignItems:'center', justifyContent:'center'}}>
+                                            <View style={{width:'100%', height:60, backgroundColor:'grey', borderRadius:99, borderColor: '#16abb2', borderWidth: 5, padding: 10, paddingTop: 7 }}>
+                                                <Text>{ noticia["title"] }</Text>
                                             </View>
                                         </View>
                                     </View>
@@ -77,7 +79,7 @@ export default function Home_oficial({route, navigation}) {
                             */ }
 
 
-                        </View>
+                        </ScrollView>
                     </View>
                 </View>
                 <View>
