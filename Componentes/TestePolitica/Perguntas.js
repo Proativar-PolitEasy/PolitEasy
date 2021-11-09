@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState} from 'react';
 import { Text, View, StyleSheet, Image, Button, Alert, TouchableOpacity, ScrollView} from 'react-native';
-import { AntDesign, FontAwesome5, EvilIcons, Ionicons, Entypo } from '@expo/vector-icons';
+import { AntDesign, FontAwesome5, EvilIcons, Ionicons, Entypo, MaterialCommunityIcons} from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 
 let numpergunta = 0;
@@ -9,7 +9,7 @@ let txtpergunta = [
     'O que mais importa em uma sociedade é o lucro.DIR1',
     'O que mais importa em uma sociedade é o bem-estar social.ESQ1',
     'A função principal do Estado é Defender a propriedade privada e zelar pela ordem social.DIR2',
-    'A função principal do Estado é assegurar diXXXXXXXXXXXXXreitos e benefícios para toda a população.ESQ2',
+    'A função principal do Estado é assegurar diXXXXXXXXXXXXXreitos e benefícios para toda a população.ESQ1',
     'Ser patriota se resume em reverenciar os símbolos de nossa pátria, respeitar as autoridades, preservar nossos costumes e conservá-los. Podemos tomar como exemplo de patriotismo as nossas forças armadas.DIR3',
     'Ser patriota é uma farsa. Isso é uma forma de alienação e manipulação das massas, onde os poderosos lançam os filhos dos trabalhadores para morrerem numa guerra que só interessa à elite.ESQ3',
     'A polícia é uma instituição que serve para manter o privilégio das classes dominantes.ESQ2',
@@ -26,7 +26,32 @@ let txtpergunta = [
     'A criminalidade é causada pela desigualdade social, portano é necessário somente reeducar os criminoso encarcerados a fim de que aprendam algum ofício para que possam se ingressar à sociedade como mão-de-obra.ESQ1'
 ];
 
-function Perguntas({route, navigation}) {
+function Perguntas({route, navigation}) { 
+
+    let [pergunta, setPergunta] = useState(0)
+
+    function renderRightArrow(){
+        if(pergunta <= txtpergunta.length-1){
+            return (
+            <TouchableOpacity onPress={()=>{setPergunta(pergunta+1)}}
+            >
+               <Entypo name="arrow-with-circle-right" size={65} color="#092838"/>
+           </TouchableOpacity>
+           )
+        }
+    }
+    function renderLeftArrow(){
+        if(pergunta != 0){
+            return (
+                <TouchableOpacity onPress={()=>{setPergunta(pergunta-1)}}>
+                <Entypo name="arrow-with-circle-left" size={65} color="#092838"/>
+            </TouchableOpacity>
+           )
+        }
+    }
+
+    
+
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%', height:'100%', backgroundColor:'#16abb2'}}>
@@ -34,27 +59,34 @@ function Perguntas({route, navigation}) {
                 <View style={{width:'100%', height:'3.5%', backgroundColor:'white'}}></View>
 
                 <View style={{width:'100%',height:'25%', alignItems:'center',flexDirection:'row', backgroundColor:'#092838'}}>
-
-                        {/* TESTE POLÍTICO */}
-                        <View style={{width:'100%', height:'100%', justifyContent:'center', alignItems:'center', flexDirection:'column',}}>
-                            <Ionicons name="ios-compass" size={80} color="white"/>
-                            <View style={{width:'100%', height:'50%',}}><Text style={{fontWeight:'bold', fontSize:45, textAlign:'center', color:'white'}}>Teste Politico</Text></View>
+                    {/* TESTE POLÍTICO */}
+                    <View style={{width:'100%', height:'100%', justifyContent:'center', alignItems:'center', flexDirection:'column',}}>
+                        <View style={{flexDirection:'row',justifyContent:'center'}}>
+                            <View style={{width:'33%', height:'100%', alignItems:'center'}}></View>
+                            <View style={{width:'33%', height:'100%', alignItems:'center',}}><Ionicons name="ios-compass" size={80} color="white"/></View>
+                            <TouchableOpacity style={{width:'33%', height:'100%', alignItems:'flex-end', marginTop:'3%'}}>
+                                <MaterialCommunityIcons name="exit-to-app" size={50} color="white"/>
+                            </TouchableOpacity>
                         </View>
+                        <View style={{width:'100%', height:'50%',}}><Text style={{fontWeight:'bold', fontSize:45, textAlign:'center', color:'white'}}>Teste Politico</Text></View>
+                    </View>
                 </View>
 
                 {/* CORPO DO TESTEEEEEE */}
                 <View style={{height:'71%', width:'100%', backgroundColor:'#16abb2', justifyContent:'center', alignItems:'center'}}>
                     <View style={{height:'100%', width:'100%', alignItems:'center',}}>
 
-                        <View style={{height:'30%', width:'90%', borderRadius:10, backgroundColor:'lightblue', marginTop:'10%', borderColor:'black', borderWidth:2,justifyContent:'center'}}>
-                            <Text style={{textAlignVertical:'center', textAlign:'center'}}>{txtpergunta[14]}</Text>{/* AQUI É O CORPO DA PERGUNTAAAAAAAAAAAA */}
+                        <View style={{height:'40%', width:'90%', marginTop:'5%', borderRadius:10, backgroundColor:'lightblue', borderColor:'black', borderWidth:2, justifyContent:'center', alignItems:'center'}}>
+                            <View style={{height:'90%', width:'95%', justifyContent:'center'}}>
+                                <Text style={{textAlignVertical:'center', textAlign:'center',}}>{txtpergunta[pergunta]}</Text>{/* AQUI É O CORPO DA PERGUNTAAAAAAAAAAAA */}
+                            </View>
                         </View>
-                        <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'10%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
-                            <TouchableOpacity style={{width:'20%', height:'100%', borderColor:'black', borderWidth:0.9, backgroundColor:'#de1414', borderTopLeftRadius: 20, borderBottomLeftRadius:25}}></TouchableOpacity>
-                            <TouchableOpacity style={{width:'20%', height:'100%', borderColor:'black', borderWidth:0.9, backgroundColor:'#f54747'}}></TouchableOpacity>
-                            <TouchableOpacity style={{width:'20%', height:'100%', borderColor:'black', borderWidth:0.9, backgroundColor:'#857c7a'}}></TouchableOpacity>
-                            <TouchableOpacity style={{width:'20%', height:'100%', borderColor:'black', borderWidth:0.9, backgroundColor:'#72c44f'}}></TouchableOpacity>
-                            <TouchableOpacity style={{width:'20%', height:'100%', borderColor:'black', borderWidth:0.9, backgroundColor:'#009942', borderTopRightRadius:25, borderBottomEndRadius:25}}></TouchableOpacity>
+                        <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'5%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+                            <TouchableOpacity style={estilos.btn1}></TouchableOpacity>
+                            <TouchableOpacity style={estilos.btn2}></TouchableOpacity>
+                            <TouchableOpacity style={estilos.btn3}></TouchableOpacity>
+                            <TouchableOpacity style={estilos.btn4}></TouchableOpacity>
+                            <TouchableOpacity style={estilos.btn5}></TouchableOpacity>
                         </View>
                         <View style={{width:'80%', height:'10%', flexDirection:'row-reverse',justifyContent:'space-between'}}>
                             <Text>Concordo</Text>
@@ -67,12 +99,12 @@ function Perguntas({route, navigation}) {
                         </TouchableOpacity>
 
                         <View style={{width:'90%', height:'21%', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-                            <TouchableOpacity>
-                                <Entypo name="arrow-with-circle-left" size={65} color="#092838"/>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Entypo name="arrow-with-circle-right" size={65} color="#092838"/>
-                            </TouchableOpacity>
+                            <View>
+                                {renderLeftArrow()}
+                            </View>
+                            <View>
+                                {renderRightArrow()}
+                            </View>
                         </View>
 
                     </View>
@@ -84,7 +116,50 @@ function Perguntas({route, navigation}) {
     );
 };
 
-
-
-
 export default Perguntas;
+
+const estilos = StyleSheet.create({
+    btn1:{
+        width:'20%', 
+        height:'100%', 
+        borderColor:'black', 
+        borderWidth:0.9, 
+        backgroundColor:'#de1414', 
+        borderTopLeftRadius: 20, 
+        borderBottomLeftRadius:25
+    },
+    btn2:{
+        width:'20%', 
+        height:'100%', 
+        borderColor:'black', 
+        borderWidth:0.9, 
+        backgroundColor:'#f54747',
+    },
+    btn3:{
+        width:'20%', 
+        height:'100%', 
+        borderColor:'black', 
+        borderWidth:0.9, 
+        backgroundColor:'#857c7a',
+    },
+    btn4:{
+        width:'20%', 
+        height:'100%', 
+        borderColor:'black', 
+        borderWidth:0.9, 
+        backgroundColor:'#72c44f',
+    },
+    btn5:{
+        width:'20%', 
+        height:'100%', 
+        borderColor:'black', 
+        borderWidth:0.9, 
+        backgroundColor:'#009942', 
+        borderTopRightRadius:25, 
+        borderBottomEndRadius:25,
+    },
+    btn:{},
+    btn:{},
+    btn:{},
+    btn:{},
+})
