@@ -28,7 +28,9 @@ let txtpergunta = [
 
 function Perguntas({route, navigation}) { 
 
-    let [pergunta, setPergunta] = useState(0)
+    let [direita, setDireita] = useState(0);
+    let [esquerda, setEsquerda] = useState(0);
+    let [pergunta, setPergunta] = useState(0);
 
     function renderRightArrow(){
         if(pergunta <= txtpergunta.length-1){
@@ -45,8 +47,34 @@ function Perguntas({route, navigation}) {
             return (
                 <TouchableOpacity onPress={()=>{setPergunta(pergunta-1)}}>
                 <Entypo name="arrow-with-circle-left" size={65} color="#092838"/>
-            </TouchableOpacity>
+                </TouchableOpacity>
            )
+        }
+    }
+    function pontos(){
+
+        switch (pergunta) {
+            case 0:
+                return(
+                <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'5%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+                        <TouchableOpacity onPress={()=>{setEsquerda(esquerda+=2)}} style={estilos.btn1}></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{setEsquerda(esquerda+=1)}} style={estilos.btn2}></TouchableOpacity>
+                        <TouchableOpacity style={estilos.btn3}></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{setDireita(direita+=1)}} style={estilos.btn4}></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{setDireita(direita+=2)}} style={estilos.btn5}></TouchableOpacity>
+                </View>)
+                break;
+        
+            default: /* SEM TOUCHABEL OPAXITY */
+                return(
+                <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'5%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+                        <View style={estilos.btn1}></View>
+                        <View style={estilos.btn2}></View>
+                        <View style={estilos.btn3}></View>
+                        <View style={estilos.btn4}></View>
+                        <View style={estilos.btn5}></View>
+                </View>)
+                break;
         }
     }
 
@@ -81,13 +109,9 @@ function Perguntas({route, navigation}) {
                                 <Text style={{textAlignVertical:'center', textAlign:'center',}}>{txtpergunta[pergunta]}</Text>{/* AQUI É O CORPO DA PERGUNTAAAAAAAAAAAA */}
                             </View>
                         </View>
-                        <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'5%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
-                            <TouchableOpacity style={estilos.btn1}></TouchableOpacity>
-                            <TouchableOpacity style={estilos.btn2}></TouchableOpacity>
-                            <TouchableOpacity style={estilos.btn3}></TouchableOpacity>
-                            <TouchableOpacity style={estilos.btn4}></TouchableOpacity>
-                            <TouchableOpacity style={estilos.btn5}></TouchableOpacity>
-                        </View>
+                        
+                        {pontos()}
+
                         <View style={{width:'80%', height:'10%', flexDirection:'row-reverse',justifyContent:'space-between'}}>
                             <Text>Concordo</Text>
                             <Text>Neutro</Text>
