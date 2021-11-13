@@ -48,7 +48,7 @@ let dPergunta = [
         peso:2,
     },
     {
-        txt:'É uma instituição que possui seus erros e acertos mas ainda possui sua função primordial de proteger e servirNEUTRO',
+        txt:'A polícia é uma instituição que possui seus erros e acertos mas ainda possui sua função primordial de proteger e servirNEUTRO',
         favor:'n', //NEUTROOOOOOOOOOOOOOOOOOO
         peso:1,
     },
@@ -250,11 +250,6 @@ function Perguntas({route, navigation}) {
                             <Text>Neutro</Text>
                             <Text>Discordo</Text>
                         </View>
-                        {/*
-                        <TouchableOpacity onPress={()=>console.log(dPergunta[pergunta].peso), somatoria()} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
-                            <Ionicons name="help-circle-outline" size={50} color="pink"/>
-                        </TouchableOpacity>
-                        */}
 
                         <TouchableOpacity onPress={()=>Alert.alert('Como funciona?','Clique nos vermelhos de acordo com o nível de sua discordância e nos verdes de acordo com sua concordância')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
                             <Ionicons name="help-circle-outline" size={50} color="#092838"/>

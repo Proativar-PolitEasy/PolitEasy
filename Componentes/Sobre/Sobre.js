@@ -29,7 +29,7 @@ function Sobre ({route, navigation: { goBack }}) {
                 <Text style={{fontSize:16, textAlign:'center'}}>Este aplicativo
                 foi criado como um trabalho de conclusão de curso
                 do Colégio Técnico Industrial "Prof. Isaac Portal
-                Rondán" em 2021. Nosso objetivo é diminuir a grande
+                Roldán" em 2021. Nosso objetivo é diminuir a grande
                 desinformação presente na cabeça de muitos jovens prestes
                 a se tornarem seres políticos.
                 </Text>
