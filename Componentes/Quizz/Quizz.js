@@ -11,33 +11,42 @@ function Quizz({route, navigation: { goBack }}) {
     const [questoes, setQuestoes] = useState([]);
     const [pergunta, setPergunta] = useState(null);
     const [notificacao, setNotificacao] = useState("");
-    const questaoAtual = 0; // index de <questoes>
-    const numeroQuestoes = 3; // alterar esse valor conforme necessário
+    const [questaoAtual, setQuestaoAtual] = useState(0); // index de <questoes>
+    const [numeroQuestoes, setNumeroQuestoes] = useState(10); // alterar esse valor conforme necessário
 
     useEffect(() => {
         const tempQuestoes = [];
+        let tempNumeroQuestoes;
         let indexPergunta;
         
-        Pergunta.RetornarPerguntasPorTema(idTemaEscolhido)
-        .then((perguntas) => {
-            // Achar questões aleatórias sobre o tema.
-            for (let i = 1; i <= numeroQuestoes; i++) {
-                // Math.floor e Math.random são usados para achar uma questão aleatória sobre o tema.
-                indexPergunta = Math.floor(Math.random() * perguntas.length);
+        if (questoes.length === 0) {
+            Pergunta.RetornarPerguntasPorTema(idTemaEscolhido)
+            .then((perguntas) => {
+                // Achar questões aleatórias sobre o tema.
+                console.log(perguntas)
+                tempNumeroQuestoes = perguntas.length < numeroQuestoes ? perguntas.length : numeroQuestoes;
                 
-                // Salvar essa questão encontrada, colocando uma nova propriedade "acertou" para que seja possível 
-                // determinar esse valor mais tarde.
-                tempQuestoes.push(Object.assign(perguntas[indexPergunta], { "acertou": null }));
+                for (let i = 1; i <= tempNumeroQuestoes; i++) {
+                    // Math.floor e Math.random são usados para achar uma questão aleatória sobre o tema.
+                    indexPergunta = Math.floor(Math.random() * perguntas.length);
+                    
+                    console.log(indexPergunta);
+                    // Salvar essa questão encontrada, colocando uma nova propriedade "acertou" para que seja possível 
+                    // determinar esse valor mais tarde.
+                    tempQuestoes.push(Object.assign(perguntas[indexPergunta], { "acertou": null }));
+                    
+                    // Eliminar a questão obtida para não obter perguntas repetidas.
+                    perguntas.splice(indexPergunta, 1);
+                }
                 
-                // Eliminar a questão obtida para não obter perguntas repetidas.
-                perguntas.splice(indexPergunta, 1);
-            }
-            
-            setQuestoes(tempQuestoes);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+                setQuestoes(tempQuestoes);
+                setPergunta(tempQuestoes[questaoAtual]);
+                setNumeroQuestoes(tempNumeroQuestoes);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
     }, [])
 
     const ResponderPergunta = (letra) => {
@@ -50,16 +59,19 @@ function Quizz({route, navigation: { goBack }}) {
         setQuestoes(questoesValorAntigo);
         
         // Notificar usuário se acertou ou errou.
-        setNotificacao(letra === pergunta["resposta"] ? "Parabéns, você acertou!" : "Que pena, você errou!");
+        setNotificacao(letra === pergunta["resposta"] ? "\n\nParabéns, você acertou!" : "\n\nQue pena, você errou!");
     }
     
     const AlternarPergunta = () => {
-        questaoAtual++;
+        const novaQuestao = questaoAtual + 1;
+        setQuestaoAtual(novaQuestao);
+        setNotificacao('');
         
-        if (questaoAtual >= numeroQuestoes) {
-            console.log("Quiz finalizado!");
+        if (novaQuestao >= numeroQuestoes) {
+            Alert.alert('QUIZ FINALIZADO!', `Você acertou ${questoes.filter(q => q['acertou']).length} das ${numeroQuestoes} questões.`);
+            goBack();
         } else {
-            setPergunta(questoes[questaoAtual]);
+            setPergunta(questoes[novaQuestao]);
         }
     }
 
@@ -88,7 +100,7 @@ function Quizz({route, navigation: { goBack }}) {
                         <Text style={estilos.txtpergunta}>{ pergunta ? pergunta["enunciado"] : "Carregando..." }{ notificacao }</Text>
                     </View>
                     <View style={{backgroundColor:'#a3672a', height:'15%'}}>
-                        <Text style={{fontSize:22, textAlign:'center'}}>1 / 10</Text>
+                        <Text style={{fontSize:22, textAlign:'center'}}>{ questaoAtual + 1 } / { numeroQuestoes }</Text>
                     </View>
                 </View>
             </View>
@@ -123,7 +135,9 @@ function Quizz({route, navigation: { goBack }}) {
             {
                 notificacao
                 ? 
-                    <Botao title="Continuar" onPress={() => AlternarPergunta()} />
+                    <TouchableOpacity onPress={() => AlternarPergunta()} style={[estilos.sombra, estilos.btn]}>
+                        <Text style={estilos.txtbtn}>Continuar</Text>
+                    </TouchableOpacity>
                 :
                     <TouchableOpacity onPress={()=>Alert.alert('COMO JOGAR?','Para jogar é muito simples, serão feitas 10 perguntas sobre o tema escolhido e para cada pergunta terá 4 opções, sendo uma delas a opção correta e 3 erradas. O jogador deve ler, interpretar as questões e tentar responder o maior número de questões da maneira correta. Leia os textos de apoio e teste seu conhecimento em nossos quizes preparados especialmente para testar suas habilidades, boa sorte!!!!')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
                         <Ionicons name="help-circle-outline" size={50} color="#6d767d"/>

@@ -9,8 +9,7 @@ import Usuario from '../../lib/database/Usuario';
 import ModalAvatar from './ModalAvatar';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Pontuacao from '../../lib/database/Pontuacao';
-import bcrypt from 'react-native-bcrypt';
-import isaac from 'isaac';
+import SHA256 from 'crypto-js/sha256';
 
 const FormatarData = (data) => {
     const dia = data.getDate().toString();
@@ -87,23 +86,13 @@ const FormCadastro = ({ route, navigation }) => {
                     console.log("Email já existe no banco.");
                 }
                 else {
-                    // Configurar criptografador.
-                    bcrypt.setRandomFallback((len) => {
-                        const buf = new Uint8Array(len);
-                        return buf.map(() => Math.floor(isaac.random() * 256));
-                    });
-
                     // Criptografa a senha e salva no banco.
-                    bcrypt.genSalt(10, (error, salt) => {
-                        bcrypt.hash(usuario["senha"], salt, (err, hash) => {
-                            const usuarioSenhaCriptografada = usuario;
-                            usuarioSenhaCriptografada["senha"] = hash;
-                            idUsuario = Usuario.SalvarUsuario(usuarioSenhaCriptografada);
-                            Usuario.SalvarAvatar(idUsuario, avatar);
-                            Pontuacao.SalvarPontuacao(idUsuario, 0);
-                            navigation.navigate("Home_oficial");
-                        });
-                    });
+                    const usuarioSenhaCriptografada = usuario;
+                    usuarioSenhaCriptografada["senha"] = JSON.stringify(SHA256(usuario['senha']).words);
+                    idUsuario = Usuario.SalvarUsuario(usuarioSenhaCriptografada);
+                    Usuario.SalvarAvatar(idUsuario, avatar);
+                    Pontuacao.SalvarPontuacao(idUsuario, 0);
+                    navigation.navigate("Home_oficial");
                 }
     
             })
