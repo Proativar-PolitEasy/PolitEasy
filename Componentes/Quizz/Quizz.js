@@ -76,31 +76,31 @@ function Quizz({route, navigation: { goBack }}) {
     }
 
     return (
-        <ImageBackground source={require('../../assets/bg_historia.jpg')} style={{flex:1, alignItems:'center'}}>
-            <View style={{width:'100%', height:25, backgroundColor:'white'}}></View>
+        <View style={{flex:1, alignItems:'center', backgroundColor:'#16abb2'}}>
+            <View style={{width:'100%', height:'3.5%', backgroundColor:'white'}}></View>
 
             {/* CABEÇALHO */}
-            <View style={{width:'100%',height:'10%', justifyContent:'center', backgroundColor:'#a3672a', flexDirection:'row'}}>
+            <View style={{width:'100%',height:'10%', justifyContent:'center', backgroundColor:'#092838', flexDirection:'row'}}>
                 <View style={{height:'100%', width:'15%', justifyContent:"center", alignItems:'flex-end',marginRight:"3%"}}>{/* SETA VOLTAR*/}
                     <TouchableOpacity onPress={() => goBack()}>
                         <AntDesign name="leftcircleo" size={50} color="white"/>
                     </TouchableOpacity>
                 </View>
                 <View style={{height:'100%', width:'60%', justifyContent:"center", alignItems:'center',}}>{/* TITULO */}
-                    <Text style={{fontFamily:'Roboto', fontSize:30,}}>QUIZ</Text>
+                    <Text style={{color:'white', fontSize:30,}}>QUIZ</Text>
                 </View>
                 <View style={{height:'100%', width:'15%', justifyContent:"center", alignItems:'center',flexDirection:'row',marginRight:"3%"}}>
                 </View>
             </View>
 
             {/* CAIXA DE TEXTO DA PERGUNTA */}
-            <View style={{height:'35%', width:'95%', marginTop:'3%', borderRadius:10, justifyContent:'center', alignItems:'center', elevation:5, backgroundColor:'#a3672a'}}>
+            <View style={{height:'35%', width:'95%', marginTop:'3%', borderRadius:10, justifyContent:'center', alignItems:'center', elevation:5, backgroundColor:'#092838'}}>
                 <View style={{height:'94%', width:'96.5%', backgroundColor:'white', borderRadius:10,justifyContent:'flex-end'}}>
                     <View style={{width:'100%', height:'85%', justifyContent:'center'}}>
                         <Text style={estilos.txtpergunta}>{ pergunta ? pergunta["enunciado"] : "Carregando..." }{ notificacao }</Text>
                     </View>
-                    <View style={{backgroundColor:'#a3672a', height:'15%'}}>
-                        <Text style={{fontSize:22, textAlign:'center'}}>{ questaoAtual + 1 } / { numeroQuestoes }</Text>
+                    <View style={{backgroundColor:'#092838', height:'15%'}}>
+                        <Text style={{color:'white', fontSize:22, textAlign:'center'}}>{ questaoAtual + 1 } / { numeroQuestoes }</Text>
                     </View>
                 </View>
             </View>
@@ -140,11 +140,10 @@ function Quizz({route, navigation: { goBack }}) {
                     </TouchableOpacity>
                 :
                     <TouchableOpacity onPress={()=>Alert.alert('COMO JOGAR?','Para jogar é muito simples, serão feitas 10 perguntas sobre o tema escolhido e para cada pergunta terá 4 opções, sendo uma delas a opção correta e 3 erradas. O jogador deve ler, interpretar as questões e tentar responder o maior número de questões da maneira correta. Leia os textos de apoio e teste seu conhecimento em nossos quizes preparados especialmente para testar suas habilidades, boa sorte!!!!')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
-                        <Ionicons name="help-circle-outline" size={50} color="#6d767d"/>
+                        <Ionicons name="help-circle-outline" size={50} color="#092838"/>
                     </TouchableOpacity>
             }
-
-        </ImageBackground>
+        </View>
     );
 };
 

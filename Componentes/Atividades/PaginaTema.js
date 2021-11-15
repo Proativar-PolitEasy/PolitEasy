@@ -31,19 +31,21 @@ function PaginaTema({ route, navigation }) {
                         </View>
                     </View>
                     <View style={stylesTemas.paginaTemaListContainer}>
-                        <View style={stylesTemas.paginaTemaItemContainer}>
+                        <View style={stylesTemas.paginaTemaItemContainer1}>
                             <TouchableOpacity 
                                 onPress={() => navigation.navigate("TextoTema", { textoTema: temaEscolhido["texto"], descricaoTema: temaEscolhido["descricao"] })}
                             >
                                 <View style={stylesTemas.paginaTemaItem}>
-                                    <Text>Texto</Text>
+                                    <Image source={require('../../assets/textoquiz/exclamacao.png')} style={{width:'45%', height:'100%', resizeMode:'contain', marginLeft: -20}}/>
+                                    <Text style={{fontSize:70, marginLeft:-20, fontWeight: 'bold'}}>Texto</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={stylesTemas.paginaTemaItemContainer}>
+                        <View style={stylesTemas.paginaTemaItemContainer2}>
                             <TouchableOpacity onPress={() => acessarQuiz()}>
                                 <View style={stylesTemas.paginaTemaItem}>
-                                    <Text>Quiz</Text>
+                                    <Text style={{fontSize:70, marginRight:-10, fontWeight: 'bold'}}>Quiz</Text>
+                                    <Image source={require('../../assets/textoquiz/interrogacao.png')} style={{width:'45%', height:'100%', resizeMode:'contain', marginRight: -10}}/>
                                 </View>
                             </TouchableOpacity>
                         </View>
