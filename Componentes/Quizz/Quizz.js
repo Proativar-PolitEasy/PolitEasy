@@ -14,6 +14,8 @@ function Quizz({route, navigation: { goBack }}) {
     const [notificacao, setNotificacao] = useState("");
     const [questaoAtual, setQuestaoAtual] = useState(0); // index de <questoes>
     const [numeroQuestoes, setNumeroQuestoes] = useState(10); // alterar esse valor conforme necessário
+    const [acertosConsecutivos, setAcertosConsecutivos] = useState(0);
+    const [recompensa, setRecompensa] = useState(0);
 
     useEffect(() => {
         const tempQuestoes = [];
@@ -58,6 +60,14 @@ function Quizz({route, navigation: { goBack }}) {
         
         // Salvar valores na memória.
         setQuestoes(questoesValorAntigo);
+
+        // Atualizar acertos consecutivos e recompensa total
+        if (letra === pergunta['resposta']) {
+            setRecompensa(recompensa + (10 * (acertosConsecutivos + 1)));
+            setAcertosConsecutivos(acertosConsecutivos + 1);
+        } else {
+            setAcertosConsecutivos(0);
+        }
         
         // Notificar usuário se acertou ou errou.
         setNotificacao(letra === pergunta["resposta"] ? "\n\nParabéns, você acertou!" : "\n\nQue pena, você errou!");
@@ -65,15 +75,13 @@ function Quizz({route, navigation: { goBack }}) {
     
     const AlternarPergunta = () => {
         const novaQuestao = questaoAtual + 1;
-        let acertos = 0;
 
         setQuestaoAtual(novaQuestao);
         setNotificacao('');
         
         if (novaQuestao >= numeroQuestoes) {
-            acertos = questoes.filter(q => q['acertou']).length;
-            Pontuacao.SalvarPontuacao(idUsuario, 10 * acertos);
-            Alert.alert('QUIZ FINALIZADO!', `Você acertou ${acertos} das ${numeroQuestoes} questões.`);
+            Pontuacao.SalvarPontuacao(idUsuario, recompensa);
+            Alert.alert('QUIZ FINALIZADO!', `Você acertou ${questoes.filter(q => q['acertou']).length} das ${numeroQuestoes} questões.`);
             goBack();
         } else {
             setPergunta(questoes[novaQuestao]);
