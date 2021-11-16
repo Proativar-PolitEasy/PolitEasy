@@ -3,13 +3,17 @@ import { Text, View, ScrollView, ImageBackground, Image } from 'react-native';
 import { } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra';
 import axios from 'axios';
+import { Row } from 'native-base';
 
 export default function Home_oficial({route, navigation}) {
     const [noticias, setNoticias] = useState([]);
-    
+    const [manchete, setManchete] = useState('');
+    const [imagemDestaque, setImagemDestaque] = useState('');
+
     useEffect(() => {
         const k = "2b884b8e8bdd4d8fb3fdaeb682c5de22";
         let artigos;
+        let primeiraNoticia;
         /*
         setNoticias([
             { 'title': 'a'},
@@ -28,6 +32,12 @@ export default function Home_oficial({route, navigation}) {
                 }
             }
 
+            if (artigos.length > 0) {
+                [primeiraNoticia] = artigos.splice(0, 1);
+                setManchete(primeiraNoticia['title']);
+                setImagemDestaque(primeiraNoticia['urlToImage']);
+            }
+
             setNoticias(artigos);
         })
         .catch((erroApi) => {
@@ -44,8 +54,11 @@ export default function Home_oficial({route, navigation}) {
                             <View style={{width:'80%', height:'20%', marginBottom: 10}}>
                                 <Text style={{fontSize:40, color:'white', textAlign:'center'}}>NOTÍCIAS</Text>
                             </View>
-                            <View style={{width:'80%', height:'70%', borderRadius:20, backgroundColor:'white'}}>
-                                <Image source={require('../../assets/noticia.jpg')} style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
+                            <View style={{width:'80%', height:'60%', borderRadius:20, borderBottomLeftRadius: 0, borderBottomRightRadius: 0, backgroundColor:'white'}}>
+                                <Image source={ imagemDestaque ? {uri: imagemDestaque} : require('../../assets/noticia.jpg') } style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
+                            </View>
+                            <View style={{width:'80%', height:'10%', borderRadius:20, borderTopLeftRadius: 0, borderTopRightRadius: 0, backgroundColor:'#16abb2', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{ color: 'white' }}>{ manchete ? manchete : 'Carregando...' }</Text>
                             </View>
                         </View>
                         <View style={{ height: '45%' }}>
