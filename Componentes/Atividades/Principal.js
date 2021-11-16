@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
-import { Text, TextInput, View, ImageBackground, BackHandler } from 'react-native';
+import { Text, TextInput, View, Image, ImageBackground, BackHandler } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra';
 import Atividades from './Atividades';
@@ -13,6 +13,12 @@ function Principal ({route, navigation}) {
     const [temas, setTemas] = useState([]);
     const [temasVisiveis, setTemasVisiveis] = useState([]);
     const [carregado, setCarregado] = useState(true);
+    const iconesMateria = {
+        "atualidades": require('../../assets/materias/atualidades.png'),
+        "filosofia": require('../../assets/materias/filosofia.png'),
+        "historia": require('../../assets/materias/historia.png'),
+        "politica": require('../../assets/materias/politica.png')
+    };
 
     const backHandler = () => {
         // Pra quando ter entrado em uma matéria, sair apenas dos temas, não da tela de atividades.
@@ -78,14 +84,21 @@ function Principal ({route, navigation}) {
         <View style={{ flex: 1 }}>
             <View style={{width:'100%',height:'91%',}}>
                 <View style={{width:'100%', height:'19%', justifyContent:'flex-end', alignItems:'center'}}>
-                <View style={{width:'70%', height:'41%', backgroundColor:'white', borderRadius: 100, flexDirection: "row", display: "flex" }}>
-                    <EvilIcons name='search' size={50}/>
-                    <TextInput 
-                        style={{ width: "70%" }} 
-                        value={pesquisa}
-                        onChangeText={(digitado) => setPesquisa(digitado)}
-                    />
-                </View>
+                    {
+                        materia ||
+                        <View style={{backgroundColor: '#092838', color: 'white', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                            <Image source={ iconesMateria[materia] } style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
+                            <Text>{materia}</Text>
+                        </View>
+                    }
+                    <View style={{width:'70%', height:'41%', backgroundColor:'white', borderRadius: 100, flexDirection: "row", display: "flex" }}>
+                        <EvilIcons name='search' size={50}/>
+                        <TextInput 
+                            style={{ width: "70%" }} 
+                            value={pesquisa}
+                            onChangeText={(digitado) => setPesquisa(digitado)}
+                        />
+                    </View>
                 </View>
                 {
                     (materia || pesquisa) 
