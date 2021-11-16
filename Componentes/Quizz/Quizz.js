@@ -6,6 +6,7 @@ import Base from '../Barra_nav/Barra'
 import Pergunta from '../../lib/database/Pergunta';
 import Pontuacao from '../../lib/database/Pontuacao';
 import Botao from '../Util/Botao';
+import Resposta from '../../lib/database/Resposta';
 
 function Quizz({route, navigation: { goBack }}) {
     const { idTemaEscolhido, idUsuario } = route.params;
@@ -60,6 +61,9 @@ function Quizz({route, navigation: { goBack }}) {
         
         // Salvar valores na memória.
         setQuestoes(questoesValorAntigo);
+
+        // Registrar resposta no banco
+        Resposta.SalvarResposta(pergunta['id'], idUsuario, letra === pergunta['resposta']);
 
         // Atualizar acertos consecutivos e recompensa total
         if (letra === pergunta['resposta']) {
