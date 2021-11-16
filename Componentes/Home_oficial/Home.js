@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, ImageBackground, Image } from 'react-native';
+import { Text, View, ScrollView, ImageBackground, Image, TouchableHighlight, Linking } from 'react-native';
 import { } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra';
 import axios from 'axios';
-import { Row } from 'native-base';
 
 export default function Home_oficial({route, navigation}) {
     const [noticias, setNoticias] = useState([]);
-    const [manchete, setManchete] = useState('');
+    const [manchete, setManchete] = useState('Carregando...');
     const [imagemDestaque, setImagemDestaque] = useState('');
+    const [linkDestaque, setLinkDestaque] = useState('');
 
     useEffect(() => {
         const k = "2b884b8e8bdd4d8fb3fdaeb682c5de22";
@@ -34,8 +34,11 @@ export default function Home_oficial({route, navigation}) {
 
             if (artigos.length > 0) {
                 [primeiraNoticia] = artigos.splice(0, 1);
-                setManchete(primeiraNoticia['title']);
-                setImagemDestaque(primeiraNoticia['urlToImage']);
+                console.log(primeiraNoticia);
+
+                setManchete(primeiraNoticia['title'] || 'Carregando...');
+                setImagemDestaque(primeiraNoticia['urlToImage'] || '');
+                setLinkDestaque(primeiraNoticia['url'] || '');
             }
 
             setNoticias(artigos);
@@ -45,6 +48,17 @@ export default function Home_oficial({route, navigation}) {
         })
     }, []);
     
+    const AbrirNoticia = (linkNoticia) => {
+        Linking.canOpenURL(linkNoticia)
+        .then((suporte) => {
+            if (suporte) {
+                Linking.openURL(linkNoticia);
+            } else {
+                console.log('Esse dispositivo não suporta abertura de links pelo navegador.');
+            }
+        })
+    }
+
     return (
         <ImageBackground source={require('../../assets/bg.jpg')} style={{flex:1, resizeMode:'cover'}}>
             <View style={{flex:1,}}>
@@ -54,8 +68,10 @@ export default function Home_oficial({route, navigation}) {
                             <View style={{width:'80%', height:'20%', marginBottom: 10}}>
                                 <Text style={{fontSize:40, color:'white', textAlign:'center'}}>NOTÍCIAS</Text>
                             </View>
-                            <View style={{width:'80%', height:'60%', borderRadius:20, borderBottomLeftRadius: 0, borderBottomRightRadius: 0, backgroundColor:'white'}}>
-                                <Image source={ imagemDestaque ? {uri: imagemDestaque} : require('../../assets/noticia.jpg') } style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
+                            <View style={{width:'80%', height:'60%'}}>
+                                <TouchableHighlight onPress={() => AbrirNoticia(linkDestaque)} style={{width:'100%', height:'100%', borderRadius:20, borderBottomLeftRadius: 0, borderBottomRightRadius: 0, backgroundColor:'white'}}>
+                                    <Image source={ imagemDestaque ? {uri: imagemDestaque} : require('../../assets/noticia.jpg') } style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
+                                </TouchableHighlight>
                             </View>
                             <View style={{width:'80%', height:'10%', borderRadius:20, borderTopLeftRadius: 0, borderTopRightRadius: 0, backgroundColor:'#16abb2', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={{ color: 'white' }}>{ manchete ? manchete : 'Carregando...' }</Text>
@@ -66,7 +82,8 @@ export default function Home_oficial({route, navigation}) {
                                 
                                 {
                                     noticias.map(noticia =>
-                                        <View style={{width:'90%', height: '100%', flexDirection:'column', alignItems:'center', justifyContent:'center'}} key={noticia['title']}>
+                                        <View key={noticia['title']} style={{width:'100%', height: '100%', flexDirection:'column', alignItems:'center', justifyContent:'center'}} >
+                                            <TouchableHighlight onPress={() => AbrirNoticia(noticia['url'])} style={{width:'90%', height: '100%', flexDirection:'column', alignItems:'center', justifyContent:'center'}} >
                                             <View style={{width:'90%', height:70, alignItems:'center', justifyContent:'center', flexDirection: 'row'}}>
                                                 <View style={{width: '20%', height: 60, borderRadius:99, borderColor: '#16abb2', borderWidth: 5, borderTopRightRadius: 0, borderBottomRightRadius: 0, borderRightWidth: 0}}>
                                                     <ImageBackground source={{'uri': noticia['urlToImage']}} style={{resizeMode:'contain', width: '100%', height: '100%', overflow: 'hidden'}} imageStyle={{borderRadius: 100, borderTopRightRadius: 0, borderBottomRightRadius: 0}} />
@@ -75,6 +92,7 @@ export default function Home_oficial({route, navigation}) {
                                                     <Text>{ noticia["title"] }</Text>
                                                 </View>
                                             </View>
+                                            </TouchableHighlight>
                                         </View>
                                     )
                                 }
