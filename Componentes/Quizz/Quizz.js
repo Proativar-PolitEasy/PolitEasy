@@ -4,10 +4,11 @@ import { Text, View, StyleSheet, Image, ImageBackground, Button, Alert, Touchabl
 import { AntDesign, MaterialCommunityIcons, FontAwesome5, FontAwesome, Ionicons } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
 import Pergunta from '../../lib/database/Pergunta';
+import Pontuacao from '../../lib/database/Pontuacao';
 import Botao from '../Util/Botao';
 
 function Quizz({route, navigation: { goBack }}) {
-    const { idTemaEscolhido } = route.params;
+    const { idTemaEscolhido, idUsuario } = route.params;
     const [questoes, setQuestoes] = useState([]);
     const [pergunta, setPergunta] = useState(null);
     const [notificacao, setNotificacao] = useState("");
@@ -64,11 +65,15 @@ function Quizz({route, navigation: { goBack }}) {
     
     const AlternarPergunta = () => {
         const novaQuestao = questaoAtual + 1;
+        let acertos = 0;
+
         setQuestaoAtual(novaQuestao);
         setNotificacao('');
         
         if (novaQuestao >= numeroQuestoes) {
-            Alert.alert('QUIZ FINALIZADO!', `Você acertou ${questoes.filter(q => q['acertou']).length} das ${numeroQuestoes} questões.`);
+            acertos = questoes.filter(q => q['acertou']).length;
+            Pontuacao.SalvarPontuacao(idUsuario, 10 * acertos);
+            Alert.alert('QUIZ FINALIZADO!', `Você acertou ${acertos} das ${numeroQuestoes} questões.`);
             goBack();
         } else {
             setPergunta(questoes[novaQuestao]);
