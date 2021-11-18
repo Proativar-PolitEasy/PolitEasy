@@ -10,18 +10,20 @@ function TestePolitica({route, navigation}) {
             
             <View style={{width:'100%', height:'91%', alignItems:'center', justifyContent:'flex-start'}}>
 
-                <View style={{width:'100%', height:'25%', alignItems:'center', justifyContent:'center', flexDirection:'row', backgroundColor:'#092838'}}>
-                    <View style={{ width: '70%', height: '41%', backgroundColor: 'white', borderRadius: 10, alignItems:'center', justifyContent:'center', marginTop:'10%' }}>
-                        <Text style={{fontWeight:'bold', fontSize:21}}>ESPECTRO POLÍTICO</Text>
-                    </View>
-                </View>
+                {/*<View style={{width:'100%', height:'25%', alignItems:'center', justifyContent:'center', flexDirection:'row',}}>
+                    <View style={{ width: '75%', height: '50%', backgroundColor:'black', borderRadius: 10, alignItems:'center', justifyContent:'center', marginTop:'10%' }}>*/}
+                        <View style={{width:'94%', height:'25%', borderRadius:5, alignItems:'center', justifyContent:'flex-end'}}>
+                            <Text style={{fontWeight:'bold', fontSize:45, color:'#092838', textAlign:'center'}}>ESPECTRO POLÍTICO</Text>
+                        </View>
+                    {/*</View>
+                </View>*/}
 
-                <View style={{width:'80%', height:'45%', marginTop:'2%'}}>
-                    <Image source={require('../../assets/noticia.jpg')} style={{resizeMode:'cover', width:'100%', height:'100%'}}/>
+                <View style={{width:'80%', height:'45%', marginTop:'2%', flexDirection:'row'}}>
+                    <Image source={require('../../assets/textoquiz/cerebro.png')} style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
                 </View>
 
                 <TouchableOpacity 
-                style={{width:'100%',height:'20%',alignItems:'center', marginTop:'2%'}}> 
+                style={{width:'35%',height:'20%',alignItems:'center', marginTop:'2%'}}> 
                     <View style={estilos.btn}>
                         <View style={estilos.btnfundo}>
                             <Text style={{color:'white', fontSize:20}}>O QUE É?</Text>
@@ -30,7 +32,7 @@ function TestePolitica({route, navigation}) {
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => navigation.navigate("Perguntas")} 
-                style={{width:'100%',height:'20%',alignItems:'center', marginTop:'-10%'}}> 
+                style={{width:'35%',height:'20%',alignItems:'center', marginTop:'-10%'}}> 
                     <View style={estilos.btn1}>
                         <View style={estilos.btnfundo1}>
                             <Text style={{color:'white', fontSize:20}}>COMEÇAR</Text>
