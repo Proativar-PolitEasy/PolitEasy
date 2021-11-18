@@ -10,6 +10,7 @@ import Tema from '../../lib/database/Tema';
 function PaginaTema({ route, navigation }) {
     const { temaEscolhido } = route.params;
     const logado = route.params.idUsuario.length !== 0;
+    const { descricaoTema } = route.params;
 
     const acessarQuiz = () => {
         if (!logado) {
@@ -25,9 +26,11 @@ function PaginaTema({ route, navigation }) {
         <ImageBackground source={require('../../assets/bg.jpg')} style={{ flex: 1, resizeMode: 'cover' }}>
             <View style={{ flex: 1 }}>
                 <View style={{ width: '100%', height: '91%', }}>
-                    <View style={{ width: '100%', height: '19%', justifyContent: 'flex-end', alignItems: 'center' }}>
-                        <View style={{ width: '70%', height: '41%', backgroundColor: 'white', borderRadius: 100 }}>
-                            <EvilIcons name='search' size={50} />
+
+
+                    <View style={{width:'100%', height:'25%', alignItems:'center', justifyContent:'center', flexDirection:'row', backgroundColor:'#092838'}}>
+                        <View style={{ width: '70%', height: '41%', backgroundColor: 'white', borderRadius: 10, alignItems:'center', justifyContent:'center', marginTop:'10%' }}>
+                            <Text style={{fontSize:26, color:'black'}}>DESCRIÇÃO TEMA{ descricaoTema }</Text>
                         </View>
                     </View>
                     <View style={stylesTemas.paginaTemaListContainer}>

@@ -13,14 +13,15 @@ const stylesTemas = StyleSheet.create({
     },
     temaListItem: {
         width: '44%', 
-        height: 50,
+        height: 60,
         paddingLeft: 10, 
         marginTop: 10, 
         backgroundColor:'white', 
-        borderRadius:20,
+        borderRadius:10,
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "center"
+        justifyContent: "center",
+        alignItems:'center'
     },
     paginaTemaListContainer: { 
         width: '100%', 
