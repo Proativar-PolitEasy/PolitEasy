@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, ImageBackground, Image, TouchableHighlight, Linking } from 'react-native';
-import { } from '@expo/vector-icons';
+import { Text, View, ScrollView, ImageBackground, Image, TouchableOpacity, Linking } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra';
 import axios from 'axios';
 
@@ -14,11 +14,6 @@ export default function Home_oficial({route, navigation}) {
         const k = "2b884b8e8bdd4d8fb3fdaeb682c5de22";
         let artigos;
         let primeiraNoticia;
-        /*
-        setNoticias([
-            { 'title': 'a'},
-            { 'title': 'b'},
-            { 'title': 'c'},{ 'title': 'd'},{ 'title': 'e'},{ 'title': 'f'},{ 'title': 'g'}]);*/
 
         // Obter notícias pela API da Google News
         axios.get("https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=" + k)
@@ -34,7 +29,6 @@ export default function Home_oficial({route, navigation}) {
 
             if (artigos.length > 0) {
                 [primeiraNoticia] = artigos.splice(0, 1);
-                console.log(primeiraNoticia);
 
                 setManchete(primeiraNoticia['title'] || 'Carregando...');
                 setImagemDestaque(primeiraNoticia['urlToImage'] || '');
@@ -73,7 +67,8 @@ export default function Home_oficial({route, navigation}) {
                             
                             {
                                 noticias.map(noticia =>
-                                    <View style={{width:'90%', height: '100%', flexDirection:'column', alignItems:'center', justifyContent:'center',}} key={noticia['title']}>
+                                    <View style={{width:'100%', height: '100%', flexDirection:'column', alignItems:'center', justifyContent:'center'}} key={noticia['title']}>
+                                        <TouchableOpacity style={{width:'90%', flexDirection:'column', alignItems:'center', justifyContent:'center'}} onPress={() => AbrirNoticia(noticia['url'])}>
                                         <View style={{width:'90%', height:70, alignItems:'center', justifyContent:'center', flexDirection: 'row'}}>
                                             <View style={{width: '20%', height: 60, borderRadius:10, borderColor: '#092838', borderWidth: 5, borderTopRightRadius: 0, borderBottomRightRadius: 0, borderRightWidth: 0}}>
                                                 <ImageBackground source={{'uri': noticia['urlToImage']}} style={{resizeMode:'contain', width: '100%', height: '100%', overflow: 'hidden'}} imageStyle={{borderRadius: 2, borderTopRightRadius: 0, borderBottomRightRadius: 0}} />
@@ -82,6 +77,7 @@ export default function Home_oficial({route, navigation}) {
                                                 <Text>{ noticia["title"] }</Text>
                                             </View>
                                         </View>
+                                        </TouchableOpacity>
                                     </View>
                                 )
                             }

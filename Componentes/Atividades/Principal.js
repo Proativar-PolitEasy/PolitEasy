@@ -84,13 +84,6 @@ function Principal ({route, navigation}) {
         <View style={{ flex: 1 }}>
             <View style={{width:'100%',height:'91%',}}>
                 <View style={{width:'100%', height:'19%', justifyContent:'flex-end', alignItems:'center'}}>
-                    {
-                        materia ||
-                        <View style={{backgroundColor: '#092838', color: 'white', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                            <Image source={ iconesMateria[materia] } style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
-                            <Text>{materia}</Text>
-                        </View>
-                    }
                     <View style={{width:'70%', height:'41%', backgroundColor:'white', borderRadius: 100, flexDirection: "row", display: "flex" }}>
                         <EvilIcons name='search' size={50}/>
                         <TextInput 

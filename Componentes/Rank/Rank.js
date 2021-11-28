@@ -53,7 +53,9 @@ function Config({ route, navigation }) {
                             top100Usuarios[i]["nome_usuario"] = usuario["nome"];
                             resolve(usuario);
                         })
-                        .catch(err => console.log(err));
+                        .catch(err => {
+                            resolve(null);
+                        });
                     }));
                 }
 

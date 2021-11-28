@@ -55,6 +55,10 @@ function Quizz({route, navigation: { goBack }}) {
 
     const ResponderPergunta = (letra) => {
         const questoesValorAntigo = questoes;
+
+        if (notificacao) {
+            return;
+        }
         
         // Achar a pergunta correspondente à respondida, alterar o seu estado "acertou" para o respectivo valor.
         questoesValorAntigo[questoesValorAntigo.indexOf(pergunta)]["acertou"] = letra === pergunta["resposta"];
@@ -70,6 +74,7 @@ function Quizz({route, navigation: { goBack }}) {
             setRecompensa(recompensa + (10 * (acertosConsecutivos + 1)));
             setAcertosConsecutivos(acertosConsecutivos + 1);
         } else {
+            console.log('Perda de streak.');
             setAcertosConsecutivos(0);
         }
         

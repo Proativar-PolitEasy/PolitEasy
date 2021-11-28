@@ -10,7 +10,6 @@ import Tema from '../../lib/database/Tema';
 function PaginaTema({ route, navigation }) {
     const { temaEscolhido } = route.params;
     const logado = route.params.idUsuario.length !== 0;
-    const { descricaoTema } = route.params;
 
     const acessarQuiz = () => {
         if (!logado) {
@@ -30,7 +29,7 @@ function PaginaTema({ route, navigation }) {
 
                     <View style={{width:'100%', height:'25%', alignItems:'center', justifyContent:'center', flexDirection:'row', backgroundColor:'#092838'}}>
                         <View style={{ width: '70%', height: '41%', backgroundColor: 'white', borderRadius: 10, alignItems:'center', justifyContent:'center', marginTop:'10%' }}>
-                            <Text style={{fontSize:26, color:'black'}}>DESCRIÇÃO TEMA{ descricaoTema }</Text>
+                            <Text style={{fontSize:26, color:'black'}}>{ temaEscolhido['descricao'] }</Text>
                         </View>
                     </View>
                     <View style={stylesTemas.paginaTemaListContainer}>
