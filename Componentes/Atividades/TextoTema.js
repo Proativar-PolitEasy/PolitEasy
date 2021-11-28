@@ -8,12 +8,14 @@ function TextoTema({route, navigation}) {
 
     return (
         <View style={{flex:1,}}>
-            <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', flexGrow:1}}>
-                <Text style={{fontSize:40, marginTop: 50}}>{ descricaoTema }</Text>
-                <Text style={{fontSize:20}}>{ textoTema }</Text>
-            </View>
-            <View>
-                <Base navigation={navigation}/>
+            <View style={{width:'100%',height:'91%', backgroundColor:'#e3e3e3', flexGrow:1}}>
+                <View style={{backgroundColor:'#092838'}}>
+                    <Text style={{fontSize:40, marginTop: 20, color:'white', fontWeight:'bold', textAlign:'center'}}>{ descricaoTema }</Text>
+                </View>
+                <ScrollView style={{marginLeft:10, marginRight:10, backgroundColor:'#e3e3e3', marginBottom:-2}}>
+                    <Text style={{fontSize:14, textAlign:'justify'}}>{ textoTema }</Text>
+                </ScrollView>
+                
             </View>
         </View>
     );

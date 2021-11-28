@@ -27,10 +27,10 @@ function Perfil({ route, navigation }) {
     return (
         <View style={{ flex: 1, }}>
             <View style={{ width: '100%', height: '91%', backgroundColor: '#16abb2', flexGrow: 1 }}>
-                <View style={{ width: '100%', height: '9%', flexDirection: "row", marginTop: 25 }}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ width: '100%', height: '9%', flexDirection: "row", marginTop: 24 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', }}>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row-reverse' }}>
+                    <View style={{ flex: 1, flexDirection: 'row-reverse', }}>
                         <TouchableOpacity onPress={() => { navigation.navigate('Config') }} >
                             <AntDesign name='setting' size={50} color='#545454' />
                         </TouchableOpacity>
@@ -38,9 +38,10 @@ function Perfil({ route, navigation }) {
                 </View>
                 <View style={{ width: '100%', height: '50%', flexDirection: 'row' }}>
                     <View style={{ flexGrow: 1, }}></View>
-                    <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                        <FontAwesome name='user-circle' size={200} color='#545454' />
-                        {   logado 
+                    <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'flex-start', marginTop:'-5%' }}>
+                        {/*<FontAwesome name='user-circle' size={200} color='#545454' />  AQUI É O USER SEM LOGIN !!!!!!!!!!!!!!!!!!!!!!!!!!!*/}
+                        <Image source={require('../../assets/avatares/avatar2.png')} style={{height:'65%', resizeMode:'contain' }} />
+                        {   logado  
                             ?   !isAdmin
                                 ||
                                 <View>
@@ -74,11 +75,19 @@ function Perfil({ route, navigation }) {
 
                 {
                     !logado ||
-                    <View style={{ flexGrow: 1, height: '32%' }}>
-                        <View style={{ width: '100%', height: '20%' }}>
-                            <Text style={{ fontSize: 30, textAlign: 'center', textAlignVertical: 'center', textDecorationLine: 'underline' }}>ESTATÍSTICAS</Text>
+                    <View style={{height:'50%', marginTop:'-25%', }}>
+                        <View style={{height:'30%', width:'100%', alignItems:'center'}}>
+                            <Text style={{fontSize:20, fontWeight:'bold'}}>NOME COMPLETO USUARIO</Text>
+                            <Text style={{fontSize:14}}>EMAIL DO USUÁRIO</Text>
+                            <TouchableOpacity onPress={() => { navigation.navigate('EditaUser') }} style={[estilos.sombra, estilos.btn1]}>
+                                    <Text style={estilos.txtbtn}>EDITAR USUÁRIO</Text>
+                            </TouchableOpacity>
+                            <View style={{width:'90%', height:'1%', backgroundColor:'black', marginTop:'5%'}}></View>
                         </View>
-                        <View style={{ width: '100%', height: '80%', flexDirection: 'row' }}>
+                        <View style={{ width: '100%', height: '15%',marginTop:'13%'}}>
+                            <Text style={{ fontSize: 30, textAlign: 'center', textAlignVertical: 'center', fontWeight:'bold' }}>ESTATÍSTICAS</Text>
+                        </View>
+                        <View style={{ width: '100%', height: '40%', flexDirection: 'row', }}>
                             <View style={{ width: '10%', height: '100%', }}></View>
                             <View style={{ width: '40%', height: '100%', alignItems: 'flex-start', justifyContent: 'space-around' }}>
                                 <Text style={estilos.txtestatistica}>Escolaridade:</Text>
@@ -126,11 +135,20 @@ const estilos = StyleSheet.create({
 
     btn: {
         width: '40%',
-        height: '50%',
+        height: '40%',
         textAlign: 'center',
         justifyContent: 'center',
         color: 'white',
-        margin: 5
+        margin: 5,
+        marginTop:'10%'
+    },
+    btn1: {
+        width: '40%',
+        height: '45%',
+        textAlign: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        margin: 5,
     },
 
     txtestatistica: {
