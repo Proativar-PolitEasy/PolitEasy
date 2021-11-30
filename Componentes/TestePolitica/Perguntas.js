@@ -5,6 +5,7 @@ import { AntDesign, FontAwesome5, EvilIcons, Ionicons, Entypo, MaterialCommunity
 import Base from '../Barra_nav/Barra'
 
 let numpergunta = 0;
+let botao = [];
 
 let dPergunta = [
     {
@@ -23,7 +24,7 @@ let dPergunta = [
         peso:2,
     },
     {
-        txt:'A função principal do Estado é assegurar diXXXXXXXXXXXXXreitos e benefícios para toda a população.ESQ1',
+        txt:'A função principal do Estado é assegurar direitos e benefícios para toda a população.ESQ1',
         favor:'e',
         peso:1,
     },
@@ -49,12 +50,12 @@ let dPergunta = [
     },
     {
         txt:'A polícia é uma instituição que possui seus erros e acertos mas ainda possui sua função primordial de proteger e servirNEUTRO',
-        favor:'n', //NEUTROOOOOOOOOOOOOOOOOOO
+        favor:'n',
         peso:1,
     },
     {
         txt:'O papel principal da educação nas escolas de ensino básico é fazer os alunos pensarem por si mesmos, tomando como base uma visão racional e crítica de nossa realidade, a fim de formar cidadãos plenos e conscientesNEUTRO',
-        favor:'n', //NEUTROOOOOOOOOOOOOOOOOOO
+        favor:'n',
         peso:1,
     },
     {
@@ -74,7 +75,7 @@ let dPergunta = [
     },
     {
         txt:'O abismo entre as classes sociais se dá pela desigualdade de oportunidades, portanto são necessárias políticas afirmativas para estreitar esse abismoNEUTRO',
-        favor:'n', //NEUTROOOOOOOOOOOOOOOOOOO
+        favor:'n',
         peso:1,
     },
     {
@@ -100,7 +101,7 @@ let dPergunta = [
 ]
 
 function Perguntas({route, navigation}) { 
-    
+    let [botao, setBotao] = useState([3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3])
     let [pontos, setPontos] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
     let [pergunta, setPergunta] = useState(0);
 
@@ -114,12 +115,20 @@ function Perguntas({route, navigation}) {
 
         }
     }
+    
+    function setNumBotao(a){
+        console.log(a);
+        console.log(pergunta);
+        let newBotao = [...botao]
+        newBotao[pergunta] = a
+        setBotao(newBotao)
+        console.log(botao)
+    }
 
     function renderRightArrow(){
         if(pergunta < dPergunta.length-1){
             return (
-            <TouchableOpacity onPress={()=>{setPergunta(pergunta+1)}}
-            >
+            <TouchableOpacity onPress={()=>{setPergunta(pergunta+1)}}>
                <Entypo name="arrow-with-circle-right" size={65} color="#092838"/>
            </TouchableOpacity>
            )
@@ -129,7 +138,7 @@ function Perguntas({route, navigation}) {
         if(pergunta != 0){
             return (
                 <TouchableOpacity onPress={()=>{setPergunta(pergunta-1)}}>
-                <Entypo name="arrow-with-circle-left" size={65} color="#092838"/>
+                    <Entypo name="arrow-with-circle-left" size={65} color="#092838"/>
                 </TouchableOpacity>
            )
         }
@@ -137,37 +146,37 @@ function Perguntas({route, navigation}) {
     function pontoss(){
         if (dPergunta[pergunta].peso == 1){
             return(
-            <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'5%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
-                <TouchableOpacity onPress={()=>{setNewPontos(-2)}} style={estilos.btn1}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(-1)}} style={estilos.btn2}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(0)}} style={estilos.btn3}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(+1)}} style={estilos.btn4}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(+2)}} style={estilos.btn5}></TouchableOpacity>
+            <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'1%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+                <TouchableOpacity onPress={()=>{setNewPontos(-2), setNumBotao(1)}} style={estilos.btn1}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(-1), setNumBotao(2)}} style={estilos.btn2}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(0), setNumBotao(3)}} style={estilos.btn3}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(+1), setNumBotao(4)}} style={estilos.btn4}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(+2), setNumBotao(5)}} style={estilos.btn5}></TouchableOpacity>
             </View>
         )}
         if (dPergunta[pergunta].peso == 2){
             return(
-            <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'5%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
-                <TouchableOpacity onPress={()=>{setNewPontos(-2/2)}} style={estilos.btn1}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(-1/2)}} style={estilos.btn2}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(0)}} style={estilos.btn3}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(+1)}} style={estilos.btn4}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(+2)}} style={estilos.btn5}></TouchableOpacity>
+            <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'1%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+                <TouchableOpacity onPress={()=>{setNewPontos(-2/2), setNumBotao(1)}} style={estilos.btn1}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(-1/2), setNumBotao(2)}} style={estilos.btn2}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(0), setNumBotao(3)}} style={estilos.btn3}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(+1), setNumBotao(4)}} style={estilos.btn4}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(+2), setNumBotao(5)}} style={estilos.btn5}></TouchableOpacity>
             </View>
         )}
         if (dPergunta[pergunta].peso == 3){
             return(
-            <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'5%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
-                <TouchableOpacity onPress={()=>{setNewPontos(-2/3)}} style={estilos.btn1}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(-1/3)}} style={estilos.btn2}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(0)}} style={estilos.btn3}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(+1)}} style={estilos.btn4}></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{setNewPontos(+2)}} style={estilos.btn5}></TouchableOpacity>
+            <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'1%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+                <TouchableOpacity onPress={()=>{setNewPontos(-2/3), setNumBotao(1)}} style={estilos.btn1}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(-1/3), setNumBotao(2)}} style={estilos.btn2}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(0), setNumBotao(3)}} style={estilos.btn3}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(+1), setNumBotao(4)}} style={estilos.btn4}></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setNewPontos(+2), setNumBotao(5)}} style={estilos.btn5}></TouchableOpacity>
             </View>
         )}
         else {
             return(
-            <View style={{width:'80%', height:'10%', flexDirection:'row', marginTop:'5%'}}>{/*BOTÕES CONCORDO/DISCORDO*/}
+            <View style={{width:'80%', height:'10%', flexDirection:'row',}}>{/*BOTÕES CONCORDO/DISCORDO*/}
             <TouchableOpacity style={estilos.btn1}></TouchableOpacity>
             <TouchableOpacity style={estilos.btn2}></TouchableOpacity>
             <TouchableOpacity style={estilos.btn3}></TouchableOpacity>
@@ -213,6 +222,71 @@ function Perguntas({route, navigation}) {
     }
 
 
+    function setinha(){
+        switch (botao[pergunta]){
+            case 1:
+                return(
+                    <View style={{width:"76%", height:'4%', marginTop:'2%', justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}>
+                            <AntDesign name="down" size={20} color="black"/>
+                        </View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                    </View>)
+                break;
+            case 2:
+                return(
+                    <View style={{width:"76%", height:'4%', marginTop:'2%', justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}>
+                            <AntDesign name="down" size={20} color="black"/>
+                        </View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                    </View>)
+                break;
+            case 3:
+                return(
+                    <View style={{width:"76%", height:'4%', marginTop:'2%', justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}>
+                            <AntDesign name="down" size={20} color="black"/>
+                        </View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                    </View>)
+                break;
+            case 4:
+                return(
+                    <View style={{width:"76%", height:'4%', marginTop:'2%', justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}>
+                            <AntDesign name="down" size={20} color="black"/>
+                        </View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                    </View>)
+                break;
+            case 5:
+                return(
+                    <View style={{width:"76%", height:'4%', marginTop:'2%', justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}></View>
+                        <View style={{width:'20%', height:'100%', alignItems:'center',}}>
+                            <AntDesign name="down" size={20} color="black"/>
+                        </View>
+                    </View>)
+                break;
+        }
+    }
+
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%', height:'100%', backgroundColor:'#16abb2'}}>
@@ -239,23 +313,28 @@ function Perguntas({route, navigation}) {
 
                         <View style={{height:'40%', width:'90%', marginTop:'5%', borderRadius:10, backgroundColor:'lightblue', borderColor:'black', borderWidth:2, justifyContent:'center', alignItems:'center'}}>
                             <View style={{height:'90%', width:'95%', justifyContent:'center'}}>
-                                <Text style={{textAlignVertical:'center', textAlign:'center',}}>{dPergunta[pergunta].txt} Pontos:{pontos[pergunta]}</Text>{/* AQUI É O CORPO DA PERGUNTAAAAAAAAAAAA */}
+                                <Text style={{textAlignVertical:'center', textAlign:'center',}}>{dPergunta[pergunta].txt} Pontos:{pontos[pergunta]} Pergunta:{pergunta}</Text>{/* AQUI É O CORPO DA PERGUNTAAAAAAAAAAAA */}
                             </View>
                         </View>
-                        
+
+                        {setinha()}
+
                         {pontoss()} 
 
-                        <View style={{width:'80%', height:'10%', flexDirection:'row-reverse',justifyContent:'space-between'}}>
+                        <View style={{width:'80%', height:'10%', flexDirection:'row-reverse',justifyContent:'space-between', backgroundColor:'yellow'}}>
                             <Text>Concordo</Text>
                             <Text>Neutro</Text>
                             <Text>Discordo</Text>
                         </View>
 
-                        <TouchableOpacity onPress={()=>Alert.alert('Como funciona?','Clique nos vermelhos de acordo com o nível de sua discordância e nos verdes de acordo com sua concordância')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
-                            <Ionicons name="help-circle-outline" size={50} color="#092838"/>
-                        </TouchableOpacity>
+                        <View style={{width:'100%', height:'11%', justifyContent:'center', alignItems:'center',backgroundColor:'blue'}}>
+                            {/*<TouchableOpacity onPress={()=>Alert.alert('Como funciona?','Clique nos vermelhos de acordo com o nível de sua discordância e nos verdes de acordo com sua concordância')}>
+                                <Ionicons name="help-circle-outline" size={50} color="#092838"/>
+                            </TouchableOpacity>*/}
+                            <TouchableOpacity style={{backgroundColor:'orange', height:'5%', width:'100%'}}></TouchableOpacity>
+                        </View>
 
-                        <View style={{width:'90%', height:'21%', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+                        <View style={{width:'90%', height:'21%', flexDirection:'row', alignItems:'center', justifyContent:'space-between', backgroundColor:'red'}}>
                             <View>
                                 {renderLeftArrow()}
                             </View>

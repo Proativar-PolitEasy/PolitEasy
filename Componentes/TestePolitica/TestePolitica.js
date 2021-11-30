@@ -22,7 +22,7 @@ function TestePolitica({route, navigation}) {
                     <Image source={require('../../assets/textoquiz/cerebro.png')} style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
                 </View>
 
-                <TouchableOpacity 
+                <TouchableOpacity onPress={()=>Alert.alert('O QUE ÉEEEEE?','texto explicando como fazer o teste!')}
                 style={{width:'35%',height:'20%',alignItems:'center', marginTop:'2%'}}> 
                     <View style={estilos.btn}>
                         <View style={estilos.btnfundo}>
