@@ -6,7 +6,7 @@ import Base from '../Barra_nav/Barra'
 
 let numpergunta = 0;
 let botao = [];
-let resultado = false
+let tela = false
 
 let dPergunta = [
     {
@@ -102,7 +102,7 @@ let dPergunta = [
 ]
 
 function Perguntas({route, navigation}) { 
-    let [resultado, setResultado] = useState(false);
+    let [tela, setTela] = useState(false);
     let [botao, setBotao] = useState([3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3])
     let [pontos, setPontos] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
     let [pergunta, setPergunta] = useState(0);
@@ -188,6 +188,7 @@ function Perguntas({route, navigation}) {
             )
         }
     }
+    
     function somatoria(){
         let direita = 0;
         let esquerda = 0;
@@ -205,9 +206,6 @@ function Perguntas({route, navigation}) {
                 neutro+=pontos[i];
             }
         });
-        console.log(direita,'aqui é direita') //É O RESULTAaDO DO TESTE
-        console.log(esquerda,'aqui é esquerda') //É O RESULTaADO DO TESTE
-        console.log(neutro,'aqui é neutro')
 
         if (esquerda > direita)
             auxiliar = esquerda - direita
@@ -221,6 +219,46 @@ function Perguntas({route, navigation}) {
         if (resultado < 0)
             resultado = 0;
         console.log('AQUI É O RESULTADO FINAL', resultado)
+        
+        if (esquerda > direita){
+            if (resultado > 36){
+                return(
+                    <View>
+                        <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
+                        <Text>EXTREMA ESQUERDA</Text>{/* RESULTADOOOO */}
+                    </View>
+                )
+            }else{
+                return(
+                    <View>
+                        <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
+                        <Text>Esquerda ganhou</Text>{/* RESULTADOOOO */}
+                    </View>
+                )
+            }
+        }else if (direita > esquerda){
+            if (resultado > 30){
+                return(
+                    <View>
+                        <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
+                        <Text>EXTREMA DIREITA</Text>{/* RESULTADOOOO */}
+                    </View>
+                )
+            }else{
+                return(
+                    <View>
+                        <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
+                        <Text>direita</Text>{/* RESULTADOOOO */}
+                    </View>
+                )
+            }
+        }else if (direita == esquerda){
+            <View>
+                <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
+                <Text>Esquerda e direita empatouu</Text>{/* RESULTADOOOO */}
+            </View>
+        }
+
     }
 
     function btnfim(){
@@ -235,7 +273,7 @@ function Perguntas({route, navigation}) {
         {
             return(
                 <View style={{width:'100%',height:'20%',alignItems:'center', marginTop:'-5%'}}>
-                    <TouchableOpacity style={estilos.btnfim} onPress={() => {somatoria(), setResultado(true)}}>
+                    <TouchableOpacity style={estilos.btnfim} onPress={() => {setTela(true)}}>
                         <View style={estilos.btnfimfundo}>
                             <Text style={{color:'#e8e8e8', fontSize:20}}>Finalizar</Text>
                         </View>
@@ -311,7 +349,7 @@ function Perguntas({route, navigation}) {
     }
 
     function Resultado(){
-        if (resultado == false){
+        if (tela == false){
             return(
                 <View style={{height:'71%', width:'100%', backgroundColor:'#16abb2', justifyContent:'center', alignItems:'center'}}>
                     <View style={{height:'100%', width:'100%', alignItems:'center',}}>
@@ -348,8 +386,14 @@ function Perguntas({route, navigation}) {
                     </View>
                 </View>
             )
-        }else if (resultado == true){
-            return(<View><Text style={{fontSize:45, textAlign:'center'}}>DEU CERTO</Text></View>)
+        }else if (tela == true){
+            return(
+                <View style={{height:'72%', width:'100%', alignItems:'center',}}>
+                    <Text style={{fontSize:45, textAlign:'center'}}>TESTE FINALIZADO!!</Text>
+                    <Text style={{fontSize:30}}>{somatoria()}</Text>
+                    <View style={{height:'20%', width:'80%', backgroundColor:'white', borderRadius:20}}></View>
+                </View>
+            )
         }
     }
 
@@ -365,7 +409,7 @@ function Perguntas({route, navigation}) {
                         <View style={{flexDirection:'row',justifyContent:'center'}}>
                             <View style={{width:'33%', height:'100%', alignItems:'center'}}></View>
                             <View style={{width:'33%', height:'100%', alignItems:'center',}}><Ionicons name="ios-compass" size={80} color="white"/></View>
-                            <TouchableOpacity onPress={()=>somatoria()} style={{width:'33%', height:'100%', alignItems:'flex-end', marginTop:'3%'}}>
+                            <TouchableOpacity onPress={()=> navigation.navigate('TestePolitica')} style={{width:'33%', height:'100%', alignItems:'flex-end', marginTop:'3%'}}>
                                 <MaterialCommunityIcons name="exit-to-app" size={50} color="white"/>
                             </TouchableOpacity>
                         </View>

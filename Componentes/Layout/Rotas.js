@@ -24,7 +24,6 @@ import CadastrarTema from '../Admin/FormCadastrarTema';
 import CadastrarPergunta from '../Admin/FormCadastrarPergunta';
 import Perguntas from '../TestePolitica/Perguntas';
 import EditaUser from '../Perfil/EditaUser';
-import Resultado from '../TestePolitica/Resultado'
 
 const Routes = createStackNavigator();
 
@@ -57,7 +56,6 @@ function Rotas(props) {
       <Routes.Screen name="ExcluiUsuario" component={ExcluiUsuario} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name="Perguntas" component={Perguntas} initialParams={{ idUsuario: props.usuario }} />
       <Routes.Screen name="EditaUser" component={EditaUser} initialParams={{ idUsuario: props.usuario }} />
-      <Routes.Screen name="Resultado" component={Resultado} initialParams={{ idUsuario: props.usuario }} />
     </Routes.Navigator>
   );
 }

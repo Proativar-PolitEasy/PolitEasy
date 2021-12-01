@@ -11,6 +11,14 @@ function Config({route, navigation}) {
         navigation.navigate("Home_oficial");
     }
     
+    function Som(){
+        let x=true;
+    }
+    function Vibra(){
+        let x=true;
+    }
+
+
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%',height:'91%', backgroundColor:'#16abb2', alignItems:'center', flexGrow:1}}>
