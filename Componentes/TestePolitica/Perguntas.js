@@ -119,12 +119,9 @@ function Perguntas({route, navigation}) {
     }
     
     function setNumBotao(a){
-        console.log(a);
-        console.log(pergunta);
         let newBotao = [...botao]
         newBotao[pergunta] = a
         setBotao(newBotao)
-        console.log(botao)
     }
 
     function renderRightArrow(){
@@ -223,40 +220,90 @@ function Perguntas({route, navigation}) {
         if (esquerda > direita){
             if (resultado > 36){
                 return(
-                    <View>
-                        <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
-                        <Text>EXTREMA ESQUERDA</Text>{/* RESULTADOOOO */}
+                    <View style={{height:'48%', width:'80%', backgroundColor:'white', borderRadius:10}}>
+                        <View style={{borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'#b90510'}}>
+                            <Text style={{textAlign:'center', color:'black', fontSize:25, fontWeight:'bold'}}>EXTREMA ESQUERDA</Text>
+                        </View>
+                            <ScrollView style={{backgroundColor:'#ffd4d4', borderBottomLeftRadius:10, borderBottomRightRadius:10}}>
+                                <Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A ideologia política de esquerda defende que o controle feito Estado, através dos seus governos, é a solução para que exista igualdade entre os cidadãos.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                De acordo com essa ideia, o Estado deve controlar o funcionamento de vários setores da sociedade, além de ser responsável por proporcionar educação, saúde, trabalho e outros direitos básicos aos cidadãos.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A ideologia de esquerda defende, principalmente, as classes sociais menos favorecidas na sociedade, ou seja, aquelas que necessitam de mais atenção e serviços públicos.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                Os grupos de esquerda também são conhecidos por apoiarem sistemas de reformas sociais, como o socialismo e o comunismo.
+                                </Text>
+                            </ScrollView>
                     </View>
                 )
             }else{
                 return(
-                    <View>
-                        <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
-                        <Text>Esquerda ganhou</Text>{/* RESULTADOOOO */}
+                    <View style={{height:'48%', width:'80%', backgroundColor:'white', borderRadius:10}}>
+                        <View style={{borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'#b90510'}}>
+                            <Text style={{textAlign:'center', color:'black', fontSize:25, fontWeight:'bold'}}>ESQUERDA</Text>
+                        </View>
+                            <ScrollView style={{backgroundColor:'#ffd4d4', borderBottomLeftRadius:10, borderBottomRightRadius:10}}>
+                                <Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A ideologia política de esquerda defende que o controle feito Estado, através dos seus governos, é a solução para que exista igualdade entre os cidadãos.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                De acordo com essa ideia, o Estado deve controlar o funcionamento de vários setores da sociedade, além de ser responsável por proporcionar educação, saúde, trabalho e outros direitos básicos aos cidadãos.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A ideologia de esquerda defende, principalmente, as classes sociais menos favorecidas na sociedade, ou seja, aquelas que necessitam de mais atenção e serviços públicos.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                Os grupos de esquerda também são conhecidos por apoiarem sistemas de reformas sociais, como o socialismo e o comunismo.
+                                </Text>
+                            </ScrollView>
                     </View>
                 )
             }
         }else if (direita > esquerda){
             if (resultado > 30){
                 return(
-                    <View>
-                        <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
-                        <Text>EXTREMA DIREITA</Text>{/* RESULTADOOOO */}
+                    <View style={{height:'48%', width:'80%', backgroundColor:'white', borderRadius:10}}>
+                        <View style={{borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'#84b4e4'}}><Text style={{textAlign:'center', color:'black', fontSize:30, fontWeight:'bold'}}>EXTREMA DIREITA</Text></View>
+                            <ScrollView style={{backgroundColor:'#d9ecff', borderBottomLeftRadius:10, borderBottomRightRadius:10}}>
+                                <Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A ideologia política de direita entende que a sociedade será melhor organizada se os direitos individuais tiverem prioridade sobre os direitos de todos, ou seja, da coletividade. É um posicionamento considerado mais conservador.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A direita também defende que o poder do Estado seja limitado, que os governos não tenham tanto poder sobre o funcionamento e a regulamentação dos setores da sociedade e das empresas. Isso significa que parte da responsabilidade deve ser dos cidadãos e não do Estado.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A direita também acredita no conceito de livre mercado, em que as empresas tenham liberdade para agir e se regulamentar por conta própria, sem sofrer intervenção por parte do Estado.
+                                </Text>
+                            </ScrollView>
                     </View>
                 )
             }else{
                 return(
-                    <View>
-                        <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
-                        <Text>direita</Text>{/* RESULTADOOOO */}
+                    <View style={{height:'48%', width:'80%', backgroundColor:'white', borderRadius:10}}>
+                        <View style={{borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'#84b4e4'}}><Text style={{textAlign:'center', color:'black', fontSize:30, fontWeight:'bold'}}>DIREITA</Text></View>
+                            <ScrollView style={{backgroundColor:'#d9ecff', borderBottomLeftRadius:10, borderBottomRightRadius:10}}>
+                                <Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A ideologia política de direita entende que a sociedade será melhor organizada se os direitos individuais tiverem prioridade sobre os direitos de todos, ou seja, da coletividade. É um posicionamento considerado mais conservador.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A direita também defende que o poder do Estado seja limitado, que os governos não tenham tanto poder sobre o funcionamento e a regulamentação dos setores da sociedade e das empresas. Isso significa que parte da responsabilidade deve ser dos cidadãos e não do Estado.
+                                </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                                A direita também acredita no conceito de livre mercado, em que as empresas tenham liberdade para agir e se regulamentar por conta própria, sem sofrer intervenção por parte do Estado.
+                                </Text>
+                            </ScrollView>
                     </View>
                 )
             }
         }else if (direita == esquerda){
-            <View>
-                <Text>direita:{direita} + esquerda:{esquerda} - neutro:{neutro}: resultado:{resultado} </Text>
-                <Text>Esquerda e direita empatouu</Text>{/* RESULTADOOOO */}
-            </View>
+            return(
+                <View style={{height:'48%', width:'80%', backgroundColor:'white', borderRadius:10}}>
+                    <View style={{borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'#5e5e5e'}}><Text style={{textAlign:'center', color:'white', fontSize:30, fontWeight:'bold'}}>CENTRO</Text></View>
+                        <ScrollView style={{backgroundColor:'#bfbfbf', borderBottomLeftRadius:10, borderBottomRightRadius:10}}>
+                            <Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                            Um partido de centro não é nem capitalista extremado nem socialista, mas ele vê a necessidade de defender o capitalismo sem deixar de se preocupar com o lado social. 
+                            </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                            Na visão da política de centro, não deve haver extremismos ou intransigências na sociedade. Os seus principais valores são: antiextremismo sustentado pelo equilíbrio que cria a tolerância que defende a coexistência pacífica. 
+                            </Text><Text style={{textAlign:'justify', marginRight:5, marginLeft:5}}>
+                            Os políticos de centro são caracterizados como sendo mais conciliadores e menos intolerantes.
+                            </Text>
+                        </ScrollView>
+                </View>
+            )
         }
 
     }
@@ -265,7 +312,7 @@ function Perguntas({route, navigation}) {
         if (pergunta != 17)
         {
             return(
-                <TouchableOpacity onPress={()=>Alert.alert('Como funciona?','Clique nos vermelhos de acordo com o nível de sua discordância e nos verdes de acordo com sua concordância')}>
+                <TouchableOpacity onPress={()=>Alert.alert('Como funciona?','Bem-vindo ao Teste do Espectro Político! Aqui você descobrirá qual a sua posição política. Serão feitas perguntas sobre política e o âmbito social, você deverá responder de acordo com suas opiniões pessoais. Depois de responder as perguntas, nosso app revelará seu posicionamento político (esquerda ou direita).')}>
                     <Ionicons name="help-circle-outline" size={50} color="#092838"/>
                 </TouchableOpacity>
             )
@@ -388,10 +435,13 @@ function Perguntas({route, navigation}) {
             )
         }else if (tela == true){
             return(
-                <View style={{height:'72%', width:'100%', alignItems:'center',}}>
-                    <Text style={{fontSize:45, textAlign:'center'}}>TESTE FINALIZADO!!</Text>
-                    <Text style={{fontSize:30}}>{somatoria()}</Text>
-                    <View style={{height:'20%', width:'80%', backgroundColor:'white', borderRadius:20}}></View>
+                <View style={{height:'72%', width:'100%', alignItems:'center', backgroundColor:'#092838'}}>
+                    <View style={{height:'43%', width:'100%'}}>
+                        <Image source={require('../../assets/textoquiz/esq_dir.jpg')} style={{resizeMode:'stretch', width:'100%', height:'100%'}}/>    
+                    </View>
+                    <Text style={{fontWeight:'bold', fontSize:15, textAlign:'center', color:'white'}}>RESULTADO:</Text>
+                    {somatoria()}
+                    <View style={{width:'100%', height:'5%'}}></View>
                 </View>
             )
         }
