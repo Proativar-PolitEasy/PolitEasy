@@ -6,6 +6,7 @@ import Base from '../Barra_nav/Barra'
 
 let numpergunta = 0;
 let botao = [];
+let resultado = false
 
 let dPergunta = [
     {
@@ -101,6 +102,7 @@ let dPergunta = [
 ]
 
 function Perguntas({route, navigation}) { 
+    let [resultado, setResultado] = useState(false);
     let [botao, setBotao] = useState([3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3])
     let [pontos, setPontos] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
     let [pergunta, setPergunta] = useState(0);
@@ -205,7 +207,7 @@ function Perguntas({route, navigation}) {
         });
         console.log(direita,'aqui é direita') //É O RESULTAaDO DO TESTE
         console.log(esquerda,'aqui é esquerda') //É O RESULTaADO DO TESTE
-        console.log(neutro,'aqui é neutro') 
+        console.log(neutro,'aqui é neutro')
 
         if (esquerda > direita)
             auxiliar = esquerda - direita
@@ -221,6 +223,27 @@ function Perguntas({route, navigation}) {
         console.log('AQUI É O RESULTADO FINAL', resultado)
     }
 
+    function btnfim(){
+        if (pergunta != 17)
+        {
+            return(
+                <TouchableOpacity onPress={()=>Alert.alert('Como funciona?','Clique nos vermelhos de acordo com o nível de sua discordância e nos verdes de acordo com sua concordância')}>
+                    <Ionicons name="help-circle-outline" size={50} color="#092838"/>
+                </TouchableOpacity>
+            )
+        }else if (pergunta == 17)
+        {
+            return(
+                <View style={{width:'100%',height:'20%',alignItems:'center', marginTop:'-5%'}}>
+                    <TouchableOpacity style={estilos.btnfim} onPress={() => {somatoria(), setResultado(true)}}>
+                        <View style={estilos.btnfimfundo}>
+                            <Text style={{color:'#e8e8e8', fontSize:20}}>Finalizar</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            )
+        }
+    }
 
     function setinha(){
         switch (botao[pergunta]){
@@ -287,6 +310,49 @@ function Perguntas({route, navigation}) {
         }
     }
 
+    function Resultado(){
+        if (resultado == false){
+            return(
+                <View style={{height:'71%', width:'100%', backgroundColor:'#16abb2', justifyContent:'center', alignItems:'center'}}>
+                    <View style={{height:'100%', width:'100%', alignItems:'center',}}>
+
+                        <View style={{height:'40%', width:'90%', marginTop:'5%', borderRadius:10, backgroundColor:'lightblue', borderColor:'black', borderWidth:2, justifyContent:'center', alignItems:'center'}}>
+                            <View style={{height:'90%', width:'95%', justifyContent:'center'}}>
+                                <Text style={{textAlignVertical:'center', textAlign:'center',}}>{dPergunta[pergunta].txt} Pontos:{pontos[pergunta]} Pergunta:{pergunta}</Text>{/* AQUI É O CORPO DA PERGUNTAAAAAAAAAAAA */}
+                            </View>
+                        </View>
+
+                        {setinha()}
+
+                        {pontoss()} 
+
+                        <View style={{width:'80%', height:'5%', flexDirection:'row-reverse',justifyContent:'space-between',}}>
+                            <Text>Concordo</Text>
+                            <Text>Neutro</Text>
+                            <Text>Discordo</Text>
+                        </View>
+
+                        <View style={{width:'100%', height:'16%', justifyContent:'center', alignItems:'center',}}>
+                            {btnfim()}
+                        </View>
+
+                        <View style={{width:'90%', height:'21%', flexDirection:'row', alignItems:'center', justifyContent:'space-between',}}>
+                            <View>
+                                {renderLeftArrow()}
+                            </View>
+                            <View>
+                                {renderRightArrow()}
+                            </View>
+                        </View>
+
+                    </View>
+                </View>
+            )
+        }else if (resultado == true){
+            return(<View><Text style={{fontSize:45, textAlign:'center'}}>DEU CERTO</Text></View>)
+        }
+    }
+
     return (
         <View style={{flex:1,}}>
             <View style={{width:'100%', height:'100%', backgroundColor:'#16abb2'}}>
@@ -308,43 +374,7 @@ function Perguntas({route, navigation}) {
                 </View>
 
                 {/* CORPO DO TESTEEEEEE */}
-                <View style={{height:'71%', width:'100%', backgroundColor:'#16abb2', justifyContent:'center', alignItems:'center'}}>
-                    <View style={{height:'100%', width:'100%', alignItems:'center',}}>
-
-                        <View style={{height:'40%', width:'90%', marginTop:'5%', borderRadius:10, backgroundColor:'lightblue', borderColor:'black', borderWidth:2, justifyContent:'center', alignItems:'center'}}>
-                            <View style={{height:'90%', width:'95%', justifyContent:'center'}}>
-                                <Text style={{textAlignVertical:'center', textAlign:'center',}}>{dPergunta[pergunta].txt} Pontos:{pontos[pergunta]} Pergunta:{pergunta}</Text>{/* AQUI É O CORPO DA PERGUNTAAAAAAAAAAAA */}
-                            </View>
-                        </View>
-
-                        {setinha()}
-
-                        {pontoss()} 
-
-                        <View style={{width:'80%', height:'10%', flexDirection:'row-reverse',justifyContent:'space-between', backgroundColor:'yellow'}}>
-                            <Text>Concordo</Text>
-                            <Text>Neutro</Text>
-                            <Text>Discordo</Text>
-                        </View>
-
-                        <View style={{width:'100%', height:'11%', justifyContent:'center', alignItems:'center',backgroundColor:'blue'}}>
-                            {/*<TouchableOpacity onPress={()=>Alert.alert('Como funciona?','Clique nos vermelhos de acordo com o nível de sua discordância e nos verdes de acordo com sua concordância')}>
-                                <Ionicons name="help-circle-outline" size={50} color="#092838"/>
-                            </TouchableOpacity>*/}
-                            <TouchableOpacity style={{backgroundColor:'orange', height:'5%', width:'100%'}}></TouchableOpacity>
-                        </View>
-
-                        <View style={{width:'90%', height:'21%', flexDirection:'row', alignItems:'center', justifyContent:'space-between', backgroundColor:'red'}}>
-                            <View>
-                                {renderLeftArrow()}
-                            </View>
-                            <View>
-                                {renderRightArrow()}
-                            </View>
-                        </View>
-
-                    </View>
-                </View>
+                {Resultado()}
 
             </View>
 
@@ -394,8 +424,27 @@ const estilos = StyleSheet.create({
         borderTopRightRadius:25, 
         borderBottomEndRadius:25,
     },
-    btn:{},
-    btn:{},
-    btn:{},
-    btn:{},
+    btnfim:{
+        width: 140,
+        height: 40,
+        elevation: 5,
+        backgroundColor: "#092838",
+        borderRadius: 18,
+        borderWidth: 1,
+        borderColor: "black",
+        justifyContent: "center",
+        alignItems: "center",},
+    
+    btnfimfundo:{
+        marginBottom: 10,
+        right: 1,
+        width: 140,
+        height: 35,
+        elevation: 2,
+        backgroundColor: "#2f5c73",
+        borderRadius: 18,
+        borderWidth: 1,
+        borderColor: "#092838",
+        justifyContent: "center",
+        alignItems: "center"},
 })
