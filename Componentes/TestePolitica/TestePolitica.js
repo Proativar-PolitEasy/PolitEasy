@@ -22,7 +22,7 @@ function TestePolitica({route, navigation}) {
                     <Image source={require('../../assets/textoquiz/cerebro.png')} style={{resizeMode:'contain', width:'100%', height:'100%'}}/>
                 </View>
 
-                <TouchableOpacity onPress={()=>Alert.alert('O QUE É?','Bem-vindo ao Teste do Espectro Político! Aqui você descobrirá qual a sua posição política. Serão feitas perguntas sobre política e o âmbito social, você deverá responder de acordo com suas opiniões pessoais. Depois de responder as perguntas, nosso app revelará seu posicionamento político (esquerda ou direita).')}
+                <TouchableOpacity onPress={()=>Alert.alert('Espectro Político','Bem-vindo ao Teste do Espectro Político! Aqui você descobrirá qual a sua posição política. Serão feitas perguntas sobre política e o âmbito social, você deverá responder de acordo com suas opiniões pessoais. Depois de responder as perguntas, nosso app revelará seu posicionamento político (esquerda ou direita).')}
                 style={{width:'35%',height:'20%',alignItems:'center', marginTop:'2%'}}> 
                     <View style={estilos.btn}>
                         <View style={estilos.btnfundo}>

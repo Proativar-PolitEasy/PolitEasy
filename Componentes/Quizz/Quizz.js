@@ -10,6 +10,7 @@ import Resposta from '../../lib/database/Resposta';
 
 function Quizz({route, navigation: { goBack }}) {
     const { idTemaEscolhido, idUsuario } = route.params;
+    const { temaEscolhido } = route.params;
     const [questoes, setQuestoes] = useState([]);
     const [pergunta, setPergunta] = useState(null);
     const [notificacao, setNotificacao] = useState("");
@@ -102,16 +103,14 @@ function Quizz({route, navigation: { goBack }}) {
             <View style={{width:'100%', height:'3.5%', backgroundColor:'white'}}></View>
 
             {/* CABEÇALHO */}
-            <View style={{width:'100%',height:'10%', justifyContent:'center', backgroundColor:'#092838', flexDirection:'row'}}>
+            <View style={{width:'100%',height:'10%', justifyContent:'flex-start', alignItems:'center', backgroundColor:'#092838', flexDirection:'row'}}>
                 <View style={{height:'100%', width:'15%', justifyContent:"center", alignItems:'flex-end',marginRight:"3%"}}>{/* SETA VOLTAR*/}
                     <TouchableOpacity onPress={() => goBack()}>
                         <AntDesign name="leftcircleo" size={50} color="white"/>
                     </TouchableOpacity>
                 </View>
-                <View style={{height:'100%', width:'60%', justifyContent:"center", alignItems:'center',}}>{/* TITULO */}
-                    <Text style={{color:'white', fontSize:30,}}>QUIZ</Text>
-                </View>
-                <View style={{height:'100%', width:'15%', justifyContent:"center", alignItems:'center',flexDirection:'row',marginRight:"3%"}}>
+                <View style={{height:'75%', width:'70%', justifyContent:"center", alignItems:'center', backgroundColor:'white', borderRadius:20,}}>{/* TITULO */}
+                    <Text style={{color:'black', fontSize:25, fontWeight:'bold'}}>NOME DO TEMA</Text>
                 </View>
             </View>
 
@@ -157,8 +156,10 @@ function Quizz({route, navigation: { goBack }}) {
             {
                 notificacao
                 ? 
-                    <TouchableOpacity onPress={() => AlternarPergunta()} style={[estilos.sombra, estilos.btn]}>
-                        <Text style={estilos.txtbtn}>Continuar</Text>
+                    <TouchableOpacity onPress={() => AlternarPergunta()} style={[estilos.btncontinuar]}>
+                        <View style={estilos.btnfundocontinuar}>
+                            <Text style={estilos.txtcontinuar}>Continuar</Text>
+                        </View>
                     </TouchableOpacity>
                 :
                     <TouchableOpacity onPress={()=>Alert.alert('COMO JOGAR?','Para jogar é muito simples, serão feitas 10 perguntas sobre o tema escolhido e para cada pergunta terá 4 opções, sendo uma delas a opção correta e 3 erradas. O jogador deve ler, interpretar as questões e tentar responder o maior número de questões da maneira correta. Leia os textos de apoio e teste seu conhecimento em nossos quizes preparados especialmente para testar suas habilidades, boa sorte!!!!')} style={{width:'15%', height:'11%', justifyContent:'center', alignItems:'center',}}>
@@ -174,7 +175,7 @@ export default Quizz;
 const estilos = StyleSheet.create({
     btn:{
         width: '75%',
-        height: 45,
+        height: '22%',
         elevation: 2,
         backgroundColor: "#9aa7b2",
         borderRadius: 18,
@@ -188,7 +189,7 @@ const estilos = StyleSheet.create({
         marginBottom: 10,
         right: 1,
         width: '100%',
-        height: 40,
+        height: '100%',
         elevation: 2,
         backgroundColor: "#c7d0d8",
         borderRadius: 18,
@@ -207,4 +208,38 @@ const estilos = StyleSheet.create({
         textAlign: "center",
         color:'#1f2136', 
         fontSize:10},
+
+    txtcontinuar:{
+        textAlign: "center",
+        color:'white', 
+        fontSize:20,
+        fontWeight:'bold'
+    },
+    
+    btncontinuar:{
+        width: '45%',
+        height: '6%',
+        elevation: 2,
+        backgroundColor: "#1f2136",
+        borderRadius: 18,
+        borderWidth: 1,
+        borderColor: "#616691",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 10,
+        marginTop:'5%'
+    },
+
+    btnfundocontinuar:{
+        marginBottom: 10,
+        right: 1,
+        width: '100%',
+        height: '100%',
+        elevation: 2,
+        backgroundColor: "#375e73",
+        borderRadius: 18,
+        borderWidth: 1,
+        borderColor: "#375e73",
+        justifyContent: "center",
+        alignItems: "center",},
 })
