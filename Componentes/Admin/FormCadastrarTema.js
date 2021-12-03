@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Text, Image, ImageBackground } from 'react-native';
 import Botao from '../Util/Botao';
 import CampoTexto from '../Util/CampoTexto';
 import stylesForm from '../../Stylesheets/stylesForm';
@@ -37,7 +37,7 @@ const CadastrarTema = ({ route, navigation }) => {
         let idTema;
 
         if (ValidaDados()) {
-            Tema.SalvarTema(tema["descricao"], tema["materia"], tema["texto"]);
+            Tema.SalvarTema(tema["descricao"], tema["materia"].toLowerCase(), tema["texto"]);
             navigation.navigate("Home_oficial");
         }
         else {
@@ -46,17 +46,21 @@ const CadastrarTema = ({ route, navigation }) => {
     }
 
     return (
-        <ScrollView>
-            <View style={stylesForm.containerCadastro}>
-                <Text style={stylesForm.heading}>TEMA</Text>
+        <ImageBackground source={require('../../assets/bg.jpg')} style={{ flex: 1, resizeMode: 'cover' }}>
+            <ScrollView>
+                <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center', marginTop: '15%' }}>
+                    <View style={{ flex: 0, width: '90%' }}>
+                        <Text style={stylesForm.heading}>TEMA</Text>
 
-                <CampoTexto campo="materia" tipo="texto" callbackEntrada={(texto) => EditarTema("materia", texto)} />
-                <CampoTexto campo="descricao" tipo="texto" callbackEntrada={(texto) => EditarTema("descricao", texto)} />
-                <CampoTexto campo="texto" tipo="texto" callbackEntrada={(texto) => EditarTema("texto", texto)} />
+                        <CampoTexto campo="Matéria" tipo="texto" callbackEntrada={(texto) => EditarTema("materia", texto)} />
+                        <CampoTexto campo="Descrição" tipo="texto" callbackEntrada={(texto) => EditarTema("descricao", texto)} />
+                        <CampoTexto campo="Texto" tipo="texto" callbackEntrada={(texto) => EditarTema("texto", texto)} />
 
-                <Botao title="CADASTRAR" onPress={Cadastrar} />
-            </View>
-        </ScrollView>
+                        <Botao title="CADASTRAR" onPress={Cadastrar} />
+                    </View>
+                </View>
+            </ScrollView>
+        </ImageBackground>
     );
 
 }

@@ -3,12 +3,42 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, ImageBackground, Button, Alert, TouchableOpacity, ScrollView} from 'react-native';
 import { AntDesign, MaterialCommunityIcons, FontAwesome5, FontAwesome, Ionicons } from '@expo/vector-icons';
 import Base from '../Barra_nav/Barra'
-import Pergunta from '../../lib/database/Pergunta';
-import Pontuacao from '../../lib/database/Pontuacao';
-import Botao from '../Util/Botao';
-import Resposta from '../../lib/database/Resposta';
+import Usuario from '../../lib/database/Usuario';
+import CampoTexto from '../Util/CampoTexto';
+import SHA256 from 'crypto-js/sha256';
 
-function EditaUser({route, navigation: { goBack }}) {
+function EditaUser({route, navigation: { goBack, navigate }}) {
+  const [nome, setNome] = useState(route.params.nome);
+  const [email, setEmail] = useState(route.params.email);
+  const [senha, setSenha] = useState('');
+
+  const AlterarUsuario = () => {
+    const senhaCriptografada = JSON.stringify(SHA256(senha).words);
+
+    if (ValidaDados()) {
+      Usuario.AlterarUsuario(route.params.id_usuario, { nome, email, senhaCriptografada });
+      setTimeout(() => {
+        navigate('Home_oficial');
+      }, 1000);
+    }
+  }
+
+  const ValidaDados = () => {
+    // Checar algum campo não preenchido
+    if (nome.length === 0 
+        || senha.length === 0
+        || email.length === 0) {
+        return false;
+    }
+    
+    // Checar se o email está no formato endereco@servidor.dominio
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return false;
+    }
+
+    return true;
+}
+
     return (
         <View style={{flex:1,backgroundColor:'#16abb2', alignItems:'center'}}>
 
@@ -26,27 +56,13 @@ function EditaUser({route, navigation: { goBack }}) {
               <FontAwesome name='user-circle' size={90} color='#545454'/>
               <Text style={{fontSize:20, textDecorationLine:'underline'}}>Alterar Usuário</Text>
             </View>
-            <View style={{width:'100%', height:'3%',}}></View>
-            <View style={{width:'100%', height:'18%', justifyContent:'flex-start', alignItems:'center',}}>
-                <View style={{width:'70%', marginBottom:'1%'}}><Text style={{fontSize:15}}>Nome</Text></View>
-                <View style={estilos.btn}>
-                  <View style={estilos.btnfundo}></View>
-                </View>
-            </View>
-            <View style={{width:'100%', height:'18%', justifyContent:'flex-start', alignItems:'center',}}>
-                <View style={{width:'70%', marginBottom:'1%'}}><Text style={{fontSize:15}}>Email</Text></View>
-                <View style={estilos.btn}>
-                  <View style={estilos.btnfundo}></View>
-                </View>
-            </View>
-            <View style={{width:'100%', height:'18%', justifyContent:'flex-start', alignItems:'center',}}>
-                <View style={{width:'70%', marginBottom:'1%'}}><Text style={{fontSize:15}}>Senha</Text></View>
-                <View style={estilos.btn}>
-                  <View style={estilos.btnfundo}></View>
-                </View>
+            <View style={{width: '80%', flex:0}}>
+              <CampoTexto campo="Nome" valor={nome} tipo="texto" callbackEntrada={(texto) => setNome(texto)} />
+              <CampoTexto campo="E-mail" valor={email} tipo="email" callbackEntrada={(texto) => setEmail(texto)} />
+              <CampoTexto campo="Senha" tipo="senha" callbackEntrada={(texto) => setSenha(texto)} />
             </View>
 
-            <TouchableOpacity onPress={{/* FUNÇÃO ALTERA */}} style={estilos.btnaltera}>
+            <TouchableOpacity onPress={AlterarUsuario} style={estilos.btnaltera}>
                 <View style={estilos.btnfundoaltera}>
                   <Text style={{color:'white', fontSize:20}}>Alterar</Text>
                 </View>

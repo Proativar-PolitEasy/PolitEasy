@@ -110,7 +110,7 @@ function Quizz({route, navigation: { goBack }}) {
                     </TouchableOpacity>
                 </View>
                 <View style={{height:'75%', width:'70%', justifyContent:"center", alignItems:'center', backgroundColor:'white', borderRadius:20,}}>{/* TITULO */}
-                    <Text style={{color:'black', fontSize:25, fontWeight:'bold'}}>NOME DO TEMA</Text>
+                    <Text style={{color:'black', fontSize:25, fontWeight:'bold'}}>{ temaEscolhido.toUpperCase() }</Text>
                 </View>
             </View>
 

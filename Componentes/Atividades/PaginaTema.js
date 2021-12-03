@@ -17,7 +17,7 @@ function PaginaTema({ route, navigation }) {
             navigation.navigate("Login");
         } else {
             // Acessar a página de Quiz
-            navigation.navigate("Quizz", { idTemaEscolhido: temaEscolhido["id"] })
+            navigation.navigate("Quizz", { idTemaEscolhido: temaEscolhido["id"], temaEscolhido: temaEscolhido['descricao'] })
         }
     }
 

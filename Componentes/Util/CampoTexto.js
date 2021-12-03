@@ -48,10 +48,11 @@ const CampoTexto = (props) => {
         <View style={stylesForm.textFieldContainer}>
             <Text style={stylesForm.descricaoCampo}>{props.campo}</Text>
             <TextInput 
-                style={stylesForm.textField}
+                style={{...stylesForm.textField, zIndex: -5}}
                 maxLength={100} 
                 secureTextEntry={props.tipo === "senha"}
-                onChangeText={(textoCampo) => AtualizarTexto(textoCampo)} 
+                onChangeText={(textoCampo) => AtualizarTexto(textoCampo)}
+                defaultValue={ props.valor || '' }
             />
             <View style={stylesForm.textFieldShadow} pointerEvents="none"></View>
             <Text style={stylesForm.errorLog}>{erro}</Text>

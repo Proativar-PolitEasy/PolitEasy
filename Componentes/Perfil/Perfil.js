@@ -114,7 +114,7 @@ function Perfil({ route, navigation }) {
                                 <Text style={estilos.txtbtn}>ADMIN</Text>
                                 </TouchableOpacity>
                             }
-                            <TouchableOpacity onPress={() => { navigation.navigate('EditaUser') }} style={[estilos.sombra, estilos.btn1]}>
+                            <TouchableOpacity onPress={() => { navigation.navigate('EditaUser', { nome: usuario['nome'], email: usuario['email'], id_usuario: usuario['id'] }) }} style={[estilos.sombra, estilos.btn1]}>
                                     <Text style={estilos.txtbtn}>EDITAR USUÁRIO</Text>
                             </TouchableOpacity>
                         </View>
